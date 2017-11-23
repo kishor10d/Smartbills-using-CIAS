@@ -27,8 +27,11 @@ class User extends BaseController
     public function index()
     {
         $this->global['pageTitle'] = 'SmartCIAS : Dashboard';
+
+        $this->load->model("Dashboard_model", 'dashboard');
+        $data["reminderCount"] = $this->dashboard->getReminderCount();
         
-        $this->loadViews("dashboard", $this->global, NULL , NULL);
+        $this->loadViews("dashboard", $this->global, $data , NULL);
     }
     
     /**

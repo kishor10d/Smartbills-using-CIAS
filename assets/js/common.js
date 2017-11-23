@@ -29,12 +29,12 @@ jQuery(document).ready(function(){
 		}
 	});
 
-	jQuery(document).on("click", ".deleteFloors", function(){
-		var floorsId = $(this).data("floorsid"),
-			hitURL = baseURL + "deleteFloors",
+	jQuery(document).on("click", ".deleteReminder", function(){
+		var srId = $(this).data("srno"),
+			hitURL = baseURL + "reminder/deleteReminder",
 			currentRow = $(this);
-
-		var confirmation = confirm("Are you sure to delete this floor ?");
+		
+		var confirmation = confirm("Are you sure to delete this reminder ?");
 		
 		if(confirmation)
 		{
@@ -42,80 +42,12 @@ jQuery(document).ready(function(){
 				type : "POST",
 				dataType : "json",
 				url : hitURL,
-				data : { floorsId : floorsId } 
+				data : { srId : srId } 
 			}).done(function(data){
+				console.log(data);
 				currentRow.parents('tr').remove();
-				if(data.status = true) { alert("Floor successfully deleted"); }
-				else if(data.status = false) { alert("Floor deletion failed"); }
-				else { alert("Access denied..!"); }
-			});
-		}
-	});
-
-	jQuery(document).on("click", ".deleteRoomSize", function(){
-		var sizeId = $(this).data("roomsizeid"),
-			hitURL = baseURL + "deleteRoomSize",
-			currentRow = $(this);
-			
-		var confirmation = confirm("Are you sure to delete this Room Size ?");
-		
-		if(confirmation)
-		{
-			jQuery.ajax({
-				type : "POST",
-				dataType : "json",
-				url : hitURL,
-				data : { sizeId : sizeId } 
-			}).done(function(data){
-				currentRow.parents('tr').remove();
-				if(data.status = true) { alert("Room Size successfully deleted"); }
-				else if(data.status = false) { alert("Room Size deletion failed"); }
-				else { alert("Access denied..!"); }
-			});
-		}
-	});
-
-	jQuery(document).on("click", ".deleteRoom", function(){
-		var roomId = $(this).data("roomid"),
-			hitURL = baseURL + "deleteRoom",
-			currentRow = $(this);
-			
-		var confirmation = confirm("Are you sure to delete this Room ?");
-		
-		if(confirmation)
-		{
-			jQuery.ajax({
-				type : "POST",
-				dataType : "json",
-				url : hitURL,
-				data : { roomId : roomId } 
-			}).done(function(data){
-				currentRow.parents('tr').remove();
-				if(data.status = true) { alert("Room successfully deleted"); }
-				else if(data.status = false) { alert("Room deletion failed"); }
-				else { alert("Access denied..!"); }
-			});
-		}
-	});
-
-	jQuery(document).on("click", ".deleteBaseFare", function(){
-		var bfId = $(this).data("bfid"),
-			hitURL = baseURL + "deleteBaseFare",
-			currentRow = $(this);
-			
-		var confirmation = confirm("Are you sure to delete this Base Fare ?");
-		
-		if(confirmation)
-		{
-			jQuery.ajax({
-				type : "POST",
-				dataType : "json",
-				url : hitURL,
-				data : { bfId : bfId } 
-			}).done(function(data){
-				currentRow.parents('tr').remove();
-				if(data.status = true) { alert("Room successfully deleted"); }
-				else if(data.status = false) { alert("Room deletion failed"); }
+				if(data.status = true) { alert("Reminder successfully deleted"); }
+				else if(data.status = false) { alert("Reminder deletion failed"); }
 				else { alert("Access denied..!"); }
 			});
 		}

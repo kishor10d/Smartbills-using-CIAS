@@ -80,5 +80,11 @@ $route['resetPasswordConfirmUser/(:any)'] = "login/resetPasswordConfirmUser/$1";
 $route['resetPasswordConfirmUser/(:any)/(:any)'] = "login/resetPasswordConfirmUser/$1/$2";
 $route['createPasswordUser'] = "login/createPasswordUser";
 
+/******* Reminder Routes ***********/
+$route['reminder'] = "reminder/index";
+$route['reminder/(:num)'] = "reminder/index/$1";
+
+
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

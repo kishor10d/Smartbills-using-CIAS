@@ -103,7 +103,12 @@
             <li class="header">MAIN NAVIGATION</li>
             <li class="treeview">
               <a href="<?php echo base_url(); ?>dashboard">
-                <i class="fa fa-dashboard"></i> <span>Dashboard</span></i>
+                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href="<?php echo base_url(); ?>reminder">
+              <i class="fa fa-bell" aria-hidden="true"></i> <span>Reminder</span>
               </a>
             </li>
             <?php

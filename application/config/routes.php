@@ -84,7 +84,9 @@ $route['createPasswordUser'] = "login/createPasswordUser";
 $route['reminder'] = "reminder/index";
 $route['reminder/(:num)'] = "reminder/index/$1";
 
-
+/******* Workers Routes ***********/
+$route['worker'] = "worker/index";
+$route['worker/(:num)'] = "worker/index/$1";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

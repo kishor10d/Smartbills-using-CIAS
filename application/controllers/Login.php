@@ -53,6 +53,7 @@ class Login extends CI_Controller
         
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|max_length[128]|trim');
         $this->form_validation->set_rules('password', 'Password', 'required|max_length[32]');
+        $this->form_validation->set_rules('type', 'Type', 'required');
         
         if($this->form_validation->run() == FALSE)
         {
@@ -62,6 +63,7 @@ class Login extends CI_Controller
         {
             $email = $this->input->post('email');
             $password = $this->input->post('password');
+            $type = $this->input->post('type');
             
             $result = $this->login_model->loginMe($email, $password);
             
@@ -73,6 +75,7 @@ class Login extends CI_Controller
                                             'role'=>$res->roleId,
                                             'roleText'=>$res->role,
                                             'name'=>$res->name,
+                                            'type'=>$type,
                                             'isLoggedIn' => TRUE
                                     );
                                     

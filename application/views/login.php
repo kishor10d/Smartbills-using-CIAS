@@ -49,6 +49,12 @@
             <input type="password" class="form-control" placeholder="Password" name="password" required />
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
+          <div class="form-group has-feedback">
+            <select name="type" class="form-control">
+              <option value="precision">Precision</option>
+              <option value="fine">Fine</option>
+            </select>
+          </div>
           <div class="row">
             <div class="col-xs-8">    
               <!-- <div class="checkbox icheck">

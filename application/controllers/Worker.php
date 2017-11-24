@@ -45,9 +45,10 @@ class Worker extends BaseController
             
             $this->global['pageTitle'] = 'SmartCIAS : Workers';
 
-            pre($data);
-            pre($this->db->last_query());
-            die;
+            // pre($data);
+            // pre($this->db->last_query());
+            // die;
+            // TODO :: Check workerListing query
             
             $this->loadViews("worker", $this->global, $data, NULL);
         }

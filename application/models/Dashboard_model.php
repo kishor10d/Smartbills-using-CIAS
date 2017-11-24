@@ -9,6 +9,10 @@
  */
 class Dashboard_model extends CI_Model
 {
+    /**
+     * This function used to get reminder count
+     * @return number $count : This is row count
+     */
     public function getReminderCount()
     {
         $this->db->select("*");

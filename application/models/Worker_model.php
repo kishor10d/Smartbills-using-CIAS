@@ -10,7 +10,7 @@
 class Worker_model extends CI_Model
 {
     /**
-     * This function is used to get the reminder listing count
+     * This function is used to get the worker listing count
      * @param string $searchText : This is optional search text
      * @return number $count : This is row count
      */
@@ -24,11 +24,11 @@ class Worker_model extends CI_Model
         }
         $query = $this->db->get();
         
-        return count($query->result());
+        return $query->num_rows();
     }
     
     /**
-     * This function is used to get the reminder listing count
+     * This function is used to get the worker listing count
      * @param string $searchText : This is optional search text
      * @param number $page : This is pagination offset
      * @param number $segment : This is pagination limit

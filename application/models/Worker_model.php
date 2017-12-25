@@ -58,7 +58,7 @@ class Worker_model extends CI_Model
         $query = $this->db->get("workerloan");
 
         $result = $query->row(); 
-        // pre($result);
+        
         return empty($result) ? "" : $result->WLamount;
     }
 
@@ -70,7 +70,7 @@ class Worker_model extends CI_Model
         $query = $this->db->get("workerloanpaid");
 
         $result = $query->row(); 
-        // pre($result);
+        
         return empty($result) ? "" : $result->WLPamount;
     }
 
@@ -82,8 +82,22 @@ class Worker_model extends CI_Model
         $query = $this->db->get("salarygiven");
 
         $result = $query->row(); 
-        // pre($result);
-        // die;
+        
         return empty($result) ? 0 : $result->SGamount;
+    }
+
+    /**
+     * This function is used to add new worker to system
+     * @param array $workerInfo : This is worker info
+     * @return number $insert_id : This is last inserted id
+     */
+    function addNewWorker($workerInfo)
+    {
+        $this->db->trans_start();
+        $this->db->insert('worker', $workerInfo);
+        $insert_id = $this->db->insert_id();
+        $this->db->trans_complete();
+        
+        return $insert_id;
     }
 }

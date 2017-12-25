@@ -60,4 +60,49 @@ class Worker extends BaseController
             $this->loadViews("worker/index", $this->global, $data, NULL);
         }
     }
+
+    /**
+     * This function used to insert new workder data
+     */
+    function addNewWorker()
+    {
+        if($this->isAdmin() == TRUE)
+        {
+            $this->loadThis();
+        }
+        else
+        {
+            $this->load->library('form_validation');
+            
+            $this->form_validation->set_rules('name','Worker Name','trim|required|max_length[50]');
+            $this->form_validation->set_rules('phone','Phone','trim|required|numeric|max_length[15]');
+            $this->form_validation->set_rules('address','Address','trim|required|max_length[128]');
+            $this->form_validation->set_rules('salary','Salary','required|numeric');
+            if($this->form_validation->run() == FALSE)
+            {
+                $this->index();
+            }
+            else
+            {                
+                $workerInfo = array('worker_name'=>$this->input->post("name"),
+                                    'phone'=>$this->input->post("phone"),
+                                    'address'=>$this->input->post("address"),
+                                    'datetime'=>date('Y-m-d H:i:sa'),
+                                    'salary'=>$this->input->post("salary"));
+
+                $result = $this->worker->addNewWorker($workerInfo);
+
+                if($result > 0)
+                {
+                    $this->session->set_flashdata('success', 'New Worker created successfully');
+                }
+                else
+                {
+                    $this->session->set_flashdata('error', 'Worker creation failed');
+                }
+                
+                redirect('worker');
+            }
+        }
+    }
 }

@@ -62,15 +62,14 @@ class Reminder_model extends CI_Model
 
     /**
      * This function is used to add new reminder to system
+     * @param array $reminderInfo : This is reminder info
      * @return number $insert_id : This is last inserted id
      */
     function addNewReminder($reminderInfo)
     {
         $this->db->trans_start();
-        $this->db->insert('reminder', $reminderInfo);
-        
-        $insert_id = $this->db->insert_id();
-        
+        $this->db->insert('reminder', $reminderInfo);        
+        $insert_id = $this->db->insert_id();        
         $this->db->trans_complete();
         
         return $insert_id;

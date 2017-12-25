@@ -45,7 +45,7 @@ class Reminder extends BaseController
             
             $this->global['pageTitle'] = 'SmartCIAS : Reminders';
             
-            $this->loadViews("reminder", $this->global, $data, NULL);
+            $this->loadViews("reminder/reminder", $this->global, $data, NULL);
         }
     }
 
@@ -65,6 +65,49 @@ class Reminder extends BaseController
             $result = $this->reminder->deleteReminder($srId);
             if ($result > 0) { echo(json_encode(array('status'=>TRUE))); }
             else { echo(json_encode(array('status'=>FALSE))); }
+        }
+    }
+
+    function addNewReminder()
+    {
+        if($this->isAdmin() == TRUE)
+        {
+            $this->loadThis();
+        }
+        else
+        {
+            $this->load->library('form_validation');
+            
+            $this->form_validation->set_rules('date','Date','trim|required|max_length[20]');
+            $this->form_validation->set_rules('reminderText','Reminder Text','trim|required|max_length[128]');
+            $this->form_validation->set_rules('period','Period','required|max_length[2]');
+            if($this->form_validation->run() == FALSE)
+            {
+                $this->index();
+            }
+            else
+            {
+                $date = $this->input->post('date');
+                $reminderText = $this->input->post('reminderText');
+                $period = $this->input->post('period');
+                
+                $reminderInfo = array('date'=>date('Y-m-d', strtotime($date)),
+                    'remindertext'=>$reminderText,
+                    'period'=>$period, 'datetime'=>date('Y-m-d H:i:sa'));
+
+                $result = $this->reminder->addNewReminder($reminderInfo);
+
+                if($result > 0)
+                {
+                    $this->session->set_flashdata('success', 'New Reminder created successfully');
+                }
+                else
+                {
+                    $this->session->set_flashdata('error', 'Reminder creation failed');
+                }
+                
+                redirect('reminder');
+            }
         }
     }
 }

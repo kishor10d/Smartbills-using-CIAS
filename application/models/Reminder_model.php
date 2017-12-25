@@ -59,4 +59,20 @@ class Reminder_model extends CI_Model
         $this->db->delete('reminder', array('srno' => $srId));
         return $this->db->affected_rows();
     }
+
+    /**
+     * This function is used to add new reminder to system
+     * @return number $insert_id : This is last inserted id
+     */
+    function addNewReminder($reminderInfo)
+    {
+        $this->db->trans_start();
+        $this->db->insert('reminder', $reminderInfo);
+        
+        $insert_id = $this->db->insert_id();
+        
+        $this->db->trans_complete();
+        
+        return $insert_id;
+    }
 }

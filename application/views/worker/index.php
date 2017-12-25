@@ -92,6 +92,9 @@
                     <td><?php echo $record->SGamount ?> <br />
                         <button class="btn btn-primary btn-sm"><i class="fa fa-gear"> </i></button></td>
                     <td class="text-center">
+                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal<?= $record->srno ?>">
+                            <i class="fa fa-edit" aria-hidden="true"></i>
+                        </button>
                         <a href="#" data-srno="<?php echo $record->srno; ?>" class="deleteReminder btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
@@ -137,7 +140,7 @@
                         <input type="text" class="form-control" id="salary" step="any" name="salary" required>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-info">Submit</button>
+                        <button class="btn btn-primary">Submit</button>
                     </div>
                 </form>
             </div>
@@ -147,6 +150,53 @@
         </div>
     </div>
 </div>
+<?php
+if(!empty($workerRecords))
+{
+    foreach($workerRecords as $rec) {
+    ?>
+
+    <div id="myModal<?= $rec->srno ?>" class="modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit Workers</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="<?= base_url() ?>worker/editWorker">
+                        <input type="text" class="form-control hidden" id="srno" name="srno" value="<?=$rec->srno ?>" required>
+                        <div class="form-group">
+                            <label for="itemname">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" value="<?=$rec->worker_name ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemprice">Phone:</label>
+                            <input type="number" class="form-control" id="phone" step="any" name="phone" value="<?=$rec->phone ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemlabour">Address:</label>
+                            <input type="text" class="form-control" id="address" step="any" name="address" value="<?=$rec->address ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemlabour">Salary(per day):</label>
+                            <input type="text" class="form-control" id="salary" step="any" name="salary" value="<?=$rec->salary ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>    
+    <?php
+    }
+}
+?>
 
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>
 <script type="text/javascript">

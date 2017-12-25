@@ -100,4 +100,17 @@ class Worker_model extends CI_Model
         
         return $insert_id;
     }
+
+    /**
+     * This function is used to add new worker to system
+     * @param array $workerInfo : This is worker info
+     * @return number $insert_id : This is last inserted id
+     */
+    function editWorker($workerInfo, $workerId)
+    {
+        $this->db->where("srno", $workerId);
+        $this->db->update('worker', $workerInfo);
+        
+        return 1;
+    }
 }

@@ -105,4 +105,49 @@ class Worker extends BaseController
             }
         }
     }
+
+    /**
+     * This function used to insert new workder data
+     */
+    function editWorker()
+    {
+        if($this->isAdmin() == TRUE)
+        {
+            $this->loadThis();
+        }
+        else
+        {
+            $this->load->library('form_validation');
+
+            $this->form_validation->set_rules('name','Worker Name','trim|required|max_length[50]');
+            $this->form_validation->set_rules('phone','Phone','trim|required|numeric|max_length[15]');
+            $this->form_validation->set_rules('address','Address','trim|required|max_length[128]');
+            $this->form_validation->set_rules('salary','Salary','required|numeric');
+            if($this->form_validation->run() == FALSE)
+            {
+                $this->index();
+            }
+            else
+            {                
+                $workerInfo = array('worker_name'=>$this->input->post("name"),
+                                    'phone'=>$this->input->post("phone"),
+                                    'address'=>$this->input->post("address"),
+                                    'datetime'=>date('Y-m-d H:i:sa'),
+                                    'salary'=>$this->input->post("salary"));
+
+                $result = $this->worker->editWorker($workerInfo, $this->input->post("srno"));
+
+                if($result > 0)
+                {
+                    $this->session->set_flashdata('success', 'Worker updated successfully');
+                }
+                else
+                {
+                    $this->session->set_flashdata('error', 'Worker updation failed');
+                }
+                
+                redirect('worker');
+            }
+        }
+    }
 }

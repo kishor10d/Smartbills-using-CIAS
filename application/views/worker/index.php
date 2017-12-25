@@ -9,7 +9,9 @@
         <div class="row">
             <div class="col-xs-12 text-right">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addNew"><i class="fa fa-plus" aria-hidden="true"></i>  Add New Reminder</a>
+                    <button class="btn btn-primary">
+                        <i class="fa fa-plus" aria-hidden="true"></i>  Add New Worker
+                    </button>
                 </div>
             </div>
         </div>
@@ -51,12 +53,15 @@
                 <tr>
                     <td><?php echo $record->worker_name ?></td>
                     <td><?php echo $record->phone ?></td>
-                    <td><?php echo $record->address ?></td>
+                    <td style="width: 20%"><?php echo $record->address ?></td>
                     <td><?php echo $record->salary ?></td>
-                    <td><?php echo $record->WLamount ?></td>
-                    <td><?php echo $record->WLPamount ?></td>
+                    <td><?php echo $record->WLamount ?> 
+                        <button class="btn btn-primary btn-sm">Add Loan</button></td>
+                    <td><?php echo $record->WLPamount ?>
+                        <button class="btn btn-primary btn-sm">Pay Off</button></td>
                     <td><?php echo ($record->WLamount - $record->WLPamount) ?></td>
-                    <td><?php echo $record->SGamount ?></td>
+                    <td><?php echo $record->SGamount ?> <br />
+                        <button class="btn btn-primary btn-sm"><i class="fa fa-gear"> </i></button></td>
                     <td class="text-center">
                         <a href="#" data-srno="<?php echo $record->srno; ?>" class="deleteReminder btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                     </td>
@@ -84,7 +89,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add New Reminder</h4>
+                <h4 class="modal-title">Add New Worker</h4>
             </div>
             <div class="modal-body">
                 <form method="post">

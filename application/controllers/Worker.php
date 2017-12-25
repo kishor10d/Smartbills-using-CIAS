@@ -40,17 +40,24 @@ class Worker extends BaseController
             $count = $this->worker->workerListingCount($searchText);
 
 			$returns = $this->paginationCompress ( "worker/", $count, 5 );
+
+            $result = $this->worker->workerListing($searchText, $returns["page"], $returns["segment"]);
+
+            $workerRecords = array();
+
+            foreach ($result as $rec)
+            {
+                $rec->WLamount = $this->worker->workerLoanById($rec->srno);
+                $rec->WLPamount = $this->worker->workerLoanPaidById($rec->srno);
+                $rec->SGamount = $this->worker->workerSalaryPaidById($rec->srno);
+                array_push($workerRecords, $rec);
+            }
             
-            $data['workerRecords'] = $this->worker->workerListing($searchText, $returns["page"], $returns["segment"]);
+            $data['workerRecords'] = $workerRecords;
             
             $this->global['pageTitle'] = 'SmartCIAS : Workers';
 
-            // pre($data);
-            // pre($this->db->last_query());
-            // die;
-            // TODO :: Check workerListing query
-            
-            $this->loadViews("worker", $this->global, $data, NULL);
+            $this->loadViews("worker/index", $this->global, $data, NULL);
         }
     }
 }

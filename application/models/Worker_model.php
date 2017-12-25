@@ -46,5 +46,44 @@ class Worker_model extends CI_Model
         $query = $this->db->get();
         
         $result = $query->result();
+
+        return $result;
+    }
+
+    function workerLoanById($workerId)
+    {
+        $this->db->select('SUM(amount) as WLamount');
+        $this->db->where("workersrno", $workerId);
+        $this->db->group_by("workersrno");
+        $query = $this->db->get("workerloan");
+
+        $result = $query->row(); 
+        // pre($result);
+        return empty($result) ? "" : $result->WLamount;
+    }
+
+    function workerLoanPaidById($workerId)
+    {
+        $this->db->select('SUM(amount) as WLPamount');
+        $this->db->where("workersrno", $workerId);
+        $this->db->group_by("workersrno");
+        $query = $this->db->get("workerloanpaid");
+
+        $result = $query->row(); 
+        // pre($result);
+        return empty($result) ? "" : $result->WLPamount;
+    }
+
+    function workerSalaryPaidById($workerId)
+    {
+        $this->db->select('SUM(totalsalary) as SGamount');
+        $this->db->where("workerno", $workerId);
+        $this->db->group_by("workerno");
+        $query = $this->db->get("salarygiven");
+
+        $result = $query->row(); 
+        // pre($result);
+        // die;
+        return empty($result) ? 0 : $result->SGamount;
     }
 }

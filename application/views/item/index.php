@@ -1,7 +1,7 @@
 <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        <i class="fa fa-bell" aria-hidden="true"></i> Item List
+        <i class="fa fa-list-ol" aria-hidden="true"></i> Item List
         <small>Add, Edit, Delete</small>
       </h1>
     </section>
@@ -78,7 +78,7 @@
                         <td><?= $record->item_labour ?></td>
                         <td class="text-center">
                             <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal<?= $record->srno ?>">
-                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
                         </td>
                     </tr>
@@ -181,7 +181,6 @@ if (!empty($itemRecords))
 }
 ?>
 
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>
 <script type="text/javascript">
     jQuery(document).ready(function(){
         jQuery('ul.pagination li a').click(function (e) {

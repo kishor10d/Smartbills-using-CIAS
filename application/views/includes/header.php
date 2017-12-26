@@ -118,7 +118,7 @@
             </li>
             <li class="treeview">
               <a href="<?php echo base_url(); ?>item">
-              <i class="fa fa-male" aria-hidden="true"></i> <span>Item List</span>
+              <i class="fa fa-list-ol" aria-hidden="true"></i> <span>Item List</span>
               </a>
             </li>
             <?php

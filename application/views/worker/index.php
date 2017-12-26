@@ -98,7 +98,7 @@
                                     <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#paysalary<?=$record->srno ?>"><i class="fa fa-gear"> </i></button></td>
                                 <td class="text-center"> <br />
                                     <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal<?= $record->srno ?>">
-                                        <i class="fa fa-edit" aria-hidden="true"></i>
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
                                     </button> 
                                     <a href="#" data-srno="<?php echo $record->srno; ?>" class="deleteWorker btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                 </td>

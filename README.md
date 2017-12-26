@@ -1,5 +1,5 @@
 # Smartbills-using-CIAS
-Smartbiils using CodeInsect CodeIgniter Admin System. This is under development.
+Smartbiils using CodeInsect CodeIgniter Admin System. This is under **development**.
 
 [Visit original repository - Original Developer](https://github.com/veerajongit/smartbills)
 

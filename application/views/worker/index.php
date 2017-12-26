@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datepicker/datepicker3.css" />
 <div class="content-wrapper">
     <section class="content-header">
       <h1>
@@ -90,7 +91,7 @@
                                     <button class="btn btn-primary btn-sm">Pay Off</button></td>
                                 <td><?php echo ($record->WLamount - $record->WLPamount) ?></td>
                                 <td><?php echo $record->SGamount ?> <br />
-                                    <button class="btn btn-primary btn-sm"><i class="fa fa-gear"> </i></button></td>
+                                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#paysalary<?=$record->srno ?>"><i class="fa fa-gear"> </i></button></td>
                                 <td class="text-center">
                                     <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal<?= $record->srno ?>">
                                         <i class="fa fa-edit" aria-hidden="true"></i>
@@ -198,6 +199,67 @@ if(!empty($workerRecords))
 }
 ?>
 
+
+<?php
+
+if(!empty($workerRecords))
+{
+    foreach($workerRecords as $rec) {
+    ?>
+
+    <div id="paysalary<?=$rec->srno?>" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Pay Salary</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="<?= base_url() ?>worker/paySalary">
+                        <input type="text" class="form-control hidden" id="workerid" name="workerid" value="<?=$rec->srno?>" required>
+                        <div class="form-group">
+                            <label for="dateloan">Date of Salary:</label>
+                            <input class="form-control datepicker" type="text" id="salarypaiddate" name="salarypaiddate" value="<?=date("d-m-Y")?>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="perdaysal">Per Day Salary:</label>
+                            <input type="text" class="form-control" id="perdaysal" name="perdaysal" value="<?=$rec->salary?>" readonly required>
+                        </div>
+                        <div class="form-group">
+                            <label for="daysfilled">No of Days filled:</label>
+                            <input type="number" class="form-control" id="daysfilled<?=$rec->srno?>" step="any" name="daysfilled" onchange="function<?=$rec->srno?>(<?=$rec->salary?>)" oninput="function<?=$rec->srno?>(<?=$rec->salary?>)" value="1" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="totalsal">Total Salary:</label>
+                            <input type="number" class="form-control" id="totalsal<?=$rec->srno?>" step="any" name="totalsal" readonly value="<?=$rec->salary?>" required>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-info">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        function function<?=$rec->srno?>(a){
+            document.getElementById('totalsal<?=$rec->srno?>').value = document.getElementById('daysfilled<?=$rec->srno?>').value * a;
+        }
+    </script>
+    <?php
+    }
+}
+?>
+
+
+
+<script src="<?php echo base_url(); ?>assets/plugins/datepicker/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>
 <script type="text/javascript">
     jQuery(document).ready(function(){
@@ -208,5 +270,6 @@ if(!empty($workerRecords))
             jQuery("#searchList").attr("action", baseURL + "reminder/" + value);
             jQuery("#searchList").submit();
         });
+        jQuery( ".datepicker" ).datepicker({ format: 'dd-mm-yyyy' });
     });
 </script>

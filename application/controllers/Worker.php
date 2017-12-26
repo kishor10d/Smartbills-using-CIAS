@@ -150,4 +150,51 @@ class Worker extends BaseController
             }
         }
     }
+
+    /**
+     * This function used to update the salary given details to worker
+     */
+    function paySalary()
+    {
+        if($this->isAdmin() == TRUE)
+        {
+            $this->loadThis();
+        }
+        else
+        {
+            $this->load->library('form_validation');
+
+            $this->form_validation->set_rules('salarypaiddate','Salary paid date','trim|required');
+            $this->form_validation->set_rules('perdaysal','Per day salary','trim|required|numeric');
+            $this->form_validation->set_rules('daysfilled','Days filled','trim|required|numeric');
+            $this->form_validation->set_rules('totalsal','Total salary','required|numeric');
+            if($this->form_validation->run() == FALSE)
+            {
+                $this->index();
+            }
+            else
+            {                
+                $workerInfo = array('date'=>date('Y-m-d', strtotime($this->input->post("salarypaiddate")) ),
+                                    'perdaysal'=>$this->input->post("perdaysal"),
+                                    'nodaysfilled'=>$this->input->post("daysfilled"),
+                                    'totalsalary'=>$this->input->post("totalsal"),
+                                    'datetime'=>date('Y-m-d H:i:sa'),
+                                    'workerno'=> $this->input->post("workerid")
+                                );
+
+                $result = $this->worker->paySalary($workerInfo);
+
+                if($result > 0)
+                {
+                    $this->session->set_flashdata('success', 'Worker salary paid successfully');
+                }
+                else
+                {
+                    $this->session->set_flashdata('error', 'Salary updation failed');
+                }
+                
+                redirect('worker');
+            }
+        }
+    }
 }

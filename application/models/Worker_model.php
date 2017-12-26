@@ -113,4 +113,19 @@ class Worker_model extends CI_Model
         
         return 1;
     }
+
+    /**
+     * This function is used to add salary for worker to system
+     * @param array $workerInfo : This is worker info
+     * @return number $insert_id : This is last inserted id
+     */
+    function paySalary($workerInfo)
+    {
+        $this->db->trans_start();
+        $this->db->insert('salarygiven', $workerInfo);
+        $insert_id = $this->db->insert_id();
+        $this->db->trans_complete();
+        
+        return $insert_id;
+    }
 }

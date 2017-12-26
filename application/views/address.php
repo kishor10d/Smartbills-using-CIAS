@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users" aria-hidden="true"></i> Address 
+            <i class="fa fa-address-book" aria-hidden="true"></i> Address 
             <small>Add, Edit, Delete</small>
         </h1>
     </section>

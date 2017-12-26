@@ -123,8 +123,7 @@
             </li>
             <li class="treeview">
               <a href="<?php echo base_url(); ?>address">
-                <i class="fa fa-users"></i>
-                <span>Address</span>
+                <i class="fa fa-envelope" aria-hidden="true"></i> <span>Address</span>
               </a>
             </li>
             <?php

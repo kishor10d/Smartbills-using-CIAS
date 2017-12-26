@@ -243,4 +243,50 @@ class Worker extends BaseController
             }
         }
     }
+
+    /**
+     * This function used to insert loan taken details
+     */
+    function loanPayOff()
+    {
+        if($this->isAdmin() == TRUE)
+        {
+            $this->loadThis();
+        }
+        else
+        {
+            $this->load->library('form_validation');
+
+            // pre($this->input->post());
+            // die;
+
+            $this->form_validation->set_rules('paiddate','Loan date','trim|required');
+            $this->form_validation->set_rules('paidamount','Loan amount','trim|required|numeric');
+            if($this->form_validation->run() == FALSE)
+            {
+                $this->index();
+            }
+            else
+            {                
+                $workerInfo = array('date'=>date('Y-m-d', strtotime($this->input->post("paiddate")) ),
+                                    'amount'=>$this->input->post("paidamount"),                                    
+                                    'workersrno'=> $this->input->post("workersrno"),
+                                    'datetime'=>date('Y-m-d H:i:sa')
+                                );
+
+                $result = $this->worker->loanPayOff($workerInfo);
+
+                if($result > 0)
+                {
+                    $this->session->set_flashdata('success', 'Worker loan paid successfully');
+                }
+                else
+                {
+                    $this->session->set_flashdata('error', 'Loan payment failed');
+                }
+                
+                redirect('worker');
+            }
+        }
+    }
 }

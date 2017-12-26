@@ -85,21 +85,21 @@
                                 <td><?php echo $record->phone ?></td>
                                 <td style="width: 20%"><?php echo $record->address ?></td>
                                 <td><?php echo $record->salary ?></td>
-                                <td><?php echo $record->WLamount ?> 
+                                <td><?php echo $record->WLamount ?> <br />
                                     <button class="btn btn-primary btn-sm" 
                                     onclick="addloan(<?=$record->srno?>)">Add Loan</button>
                                 </td>
-                                <td><?php echo $record->WLPamount ?>
+                                <td><?php echo $record->WLPamount ?> <br />
                                     <button class="btn btn-primary btn-sm" 
                                     onclick="payoff(<?=$record->srno?>)">Pay Off</button>
                                 </td>
                                 <td><?php echo ($record->WLamount - $record->WLPamount) ?></td>
                                 <td><?php echo $record->SGamount ?> <br />
                                     <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#paysalary<?=$record->srno ?>"><i class="fa fa-gear"> </i></button></td>
-                                <td class="text-center">
+                                <td class="text-center"> <br />
                                     <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal<?= $record->srno ?>">
                                         <i class="fa fa-edit" aria-hidden="true"></i>
-                                    </button>
+                                    </button> 
                                     <a href="#" data-srno="<?php echo $record->srno; ?>" class="deleteReminder btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
@@ -261,7 +261,7 @@ if(!empty($workerRecords))
 }
 ?>
 
-<div id="myModalloantaken" class="modal fade" role="dialog">
+<div id="myModalloantaken" class="modal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -289,7 +289,7 @@ if(!empty($workerRecords))
     </div>
 </div>
 
-<div id="myModalloanpaidoff" class="modal fade" role="dialog">
+<div id="myModalloanpaidoff" class="modal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -297,11 +297,11 @@ if(!empty($workerRecords))
                 <h4 class="modal-title">Loan Paid Off</h4>
             </div>
             <div class="modal-body">
-                <form method="post">
+                <form method="post" action="<?= base_url() ?>worker/loanPayOff">
                     <input type="text" required id="workersrnos" name="workersrno" class="hidden">
                     <div class="form-group">
                         <label for="dateloan">Date of loan:</label>
-                        <input class="form-control" type="text" id="paiddate" name="paiddate" value="<?=date("d-m-Y")?>" required>
+                        <input class="form-control datepicker" type="text" id="paiddate" name="paiddate" value="<?=date("d-m-Y")?>" required>
                     </div>
                     <div class="form-group">
                         <label for="loanamount">Loan amount:</label>
@@ -337,7 +337,7 @@ if(!empty($workerRecords))
         $('#myModalloantaken').modal('show');
     }
     function payoff(srno){
-        $('#workersrno').val(srno);
+        $('#workersrnos').val(srno);
         $('#myModalloanpaidoff').modal('show');
     }
 </script>

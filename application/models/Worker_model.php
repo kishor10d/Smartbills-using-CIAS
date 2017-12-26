@@ -128,4 +128,19 @@ class Worker_model extends CI_Model
         
         return $insert_id;
     }
+
+    /**
+     * This function is used to add laon for worker to system
+     * @param array $workerInfo : This is worker info
+     * @return number $insert_id : This is last inserted id
+     */
+    function loanTaken($workerInfo)
+    {
+        $this->db->trans_start();
+        $this->db->insert('workerloan', $workerInfo);
+        $insert_id = $this->db->insert_id();
+        $this->db->trans_complete();
+        
+        return $insert_id;
+    }
 }

@@ -197,4 +197,50 @@ class Worker extends BaseController
             }
         }
     }
+
+    /**
+     * This function used to insert loan taken details
+     */
+    function loanTaken()
+    {
+        if($this->isAdmin() == TRUE)
+        {
+            $this->loadThis();
+        }
+        else
+        {
+            $this->load->library('form_validation');
+
+            // pre($this->input->post());
+            // die;
+
+            $this->form_validation->set_rules('dateloan','Loan date','trim|required');
+            $this->form_validation->set_rules('loanamount','Loan amount','trim|required|numeric');
+            if($this->form_validation->run() == FALSE)
+            {
+                $this->index();
+            }
+            else
+            {                
+                $workerInfo = array('date'=>date('Y-m-d', strtotime($this->input->post("dateloan")) ),
+                                    'amount'=>$this->input->post("loanamount"),                                    
+                                    'workersrno'=> $this->input->post("workerid"),
+                                    'datetime'=>date('Y-m-d H:i:sa')
+                                );
+
+                $result = $this->worker->loanTaken($workerInfo);
+
+                if($result > 0)
+                {
+                    $this->session->set_flashdata('success', 'Worker loan disbursed successfully');
+                }
+                else
+                {
+                    $this->session->set_flashdata('error', 'Loan disbursment failed');
+                }
+                
+                redirect('worker');
+            }
+        }
+    }
 }

@@ -269,8 +269,8 @@ if(!empty($workerRecords))
                 <h4 class="modal-title">Loan Taken</h4>
             </div>
             <div class="modal-body">
-                <form method="post">
-                    <input type="text" required id="workerid" name="workerid" class="hidden">
+                <form method="post" action="<?= base_url() ?>worker/loanTaken">
+                    <input type="text" required id="workerids" name="workerid" class="hidden">
                     <div class="form-group">
                         <label for="dateloan">Date of loan:</label>
                         <input class="form-control datepicker" type="text" id="dateloan" name="dateloan" value="<?=date("d-m-Y")?>" required>
@@ -279,7 +279,7 @@ if(!empty($workerRecords))
                         <label for="loanamount">Loan amount:</label>
                         <input class="form-control" type="number" id="loanamount" name="loanamount" min="1" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <input type="submit" class="btn btn-primary" value="submit" />
                 </form>
             </div>
             <div class="modal-footer">
@@ -298,7 +298,7 @@ if(!empty($workerRecords))
             </div>
             <div class="modal-body">
                 <form method="post">
-                    <input type="text" required id="workersrno" name="workersrno" class="hidden">
+                    <input type="text" required id="workersrnos" name="workersrno" class="hidden">
                     <div class="form-group">
                         <label for="dateloan">Date of loan:</label>
                         <input class="form-control" type="text" id="paiddate" name="paiddate" value="<?=date("d-m-Y")?>" required>
@@ -333,7 +333,7 @@ if(!empty($workerRecords))
     });
 
     function addloan(srno){
-        $('#workerid').val(srno);
+        $('#workerids').val(srno);
         $('#myModalloantaken').modal('show');
     }
     function payoff(srno){

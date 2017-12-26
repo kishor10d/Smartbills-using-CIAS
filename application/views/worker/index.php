@@ -86,9 +86,13 @@
                                 <td style="width: 20%"><?php echo $record->address ?></td>
                                 <td><?php echo $record->salary ?></td>
                                 <td><?php echo $record->WLamount ?> 
-                                    <button class="btn btn-primary btn-sm">Add Loan</button></td>
+                                    <button class="btn btn-primary btn-sm" 
+                                    onclick="addloan(<?=$record->srno?>)">Add Loan</button>
+                                </td>
                                 <td><?php echo $record->WLPamount ?>
-                                    <button class="btn btn-primary btn-sm">Pay Off</button></td>
+                                    <button class="btn btn-primary btn-sm" 
+                                    onclick="payoff(<?=$record->srno?>)">Pay Off</button>
+                                </td>
                                 <td><?php echo ($record->WLamount - $record->WLPamount) ?></td>
                                 <td><?php echo $record->SGamount ?> <br />
                                     <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#paysalary<?=$record->srno ?>"><i class="fa fa-gear"> </i></button></td>
@@ -207,7 +211,7 @@ if(!empty($workerRecords))
     foreach($workerRecords as $rec) {
     ?>
 
-    <div id="paysalary<?=$rec->srno?>" class="modal fade" role="dialog">
+    <div id="paysalary<?=$rec->srno?>" class="modal" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -234,7 +238,7 @@ if(!empty($workerRecords))
                             <input type="number" class="form-control" id="totalsal<?=$rec->srno?>" step="any" name="totalsal" readonly value="<?=$rec->salary?>" required>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-info">Submit</button>
+                            <button class="btn btn-primary">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -257,6 +261,61 @@ if(!empty($workerRecords))
 }
 ?>
 
+<div id="myModalloantaken" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Loan Taken</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    <input type="text" required id="workerid" name="workerid" class="hidden">
+                    <div class="form-group">
+                        <label for="dateloan">Date of loan:</label>
+                        <input class="form-control datepicker" type="text" id="dateloan" name="dateloan" value="<?=date("d-m-Y")?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loanamount">Loan amount:</label>
+                        <input class="form-control" type="number" id="loanamount" name="loanamount" min="1" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="myModalloanpaidoff" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Loan Paid Off</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    <input type="text" required id="workersrno" name="workersrno" class="hidden">
+                    <div class="form-group">
+                        <label for="dateloan">Date of loan:</label>
+                        <input class="form-control" type="text" id="paiddate" name="paiddate" value="<?=date("d-m-Y")?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loanamount">Loan amount:</label>
+                        <input class="form-control" type="number" id="paidamount" name="paidamount" min="1" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script src="<?php echo base_url(); ?>assets/plugins/datepicker/bootstrap-datepicker.js"></script>
@@ -272,4 +331,13 @@ if(!empty($workerRecords))
         });
         jQuery( ".datepicker" ).datepicker({ format: 'dd-mm-yyyy' });
     });
+
+    function addloan(srno){
+        $('#workerid').val(srno);
+        $('#myModalloantaken').modal('show');
+    }
+    function payoff(srno){
+        $('#workersrno').val(srno);
+        $('#myModalloanpaidoff').modal('show');
+    }
 </script>

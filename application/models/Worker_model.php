@@ -22,6 +22,7 @@ class Worker_model extends CI_Model
             $likeCriteria = "(BaseTbl.worker_name LIKE '%".$searchText."%')";
             $this->db->where($likeCriteria);
         }
+        $this->db->where("is_delete", 0);
         $query = $this->db->get();
         
         return $query->num_rows();
@@ -43,11 +44,25 @@ class Worker_model extends CI_Model
             $this->db->where($likeCriteria);
         }
         $this->db->limit($page, $segment);
+        $this->db->where("is_delete", 0);
         $query = $this->db->get();
         
         $result = $query->result();
 
         return $result;
+    }
+
+    /**
+     * This function is used to delete the worker information
+     * @param number $srId : This is worker id
+     * @return boolean $result : TRUE / FALSE
+     */
+    function deleteWorker($srId)
+    {
+        $this->db->set('is_delete', 1);
+        $this->db->where('srno', $srId);
+        $this->db->update('worker');
+        return $this->db->affected_rows();
     }
 
     function workerLoanById($workerId)

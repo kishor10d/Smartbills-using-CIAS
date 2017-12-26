@@ -62,6 +62,25 @@ class Worker extends BaseController
     }
 
     /**
+     * This function is used to delete the worker using id
+     * @return boolean $result : TRUE / FALSE
+     */
+    function deleteWorker()
+    {
+        if($this->isAdmin() == TRUE)
+        {
+            echo(json_encode(array('status'=>'access')));
+        }
+        else
+        {
+            $srId = $this->input->post('srId');
+            $result = $this->worker->deleteWorker($srId);
+            if ($result > 0) { echo(json_encode(array('status'=>TRUE))); }
+            else { echo(json_encode(array('status'=>FALSE))); }
+        }
+    }
+
+    /**
      * This function used to insert new workder data
      */
     function addNewWorker()

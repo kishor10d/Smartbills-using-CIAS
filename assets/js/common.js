@@ -10,7 +10,7 @@ jQuery(document).ready(function(){
 			hitURL = baseURL + "deleteUser",
 			currentRow = $(this);
 		
-		var confirmation = confirm("Are you sure to delete this user ?");
+		var confirmation = confirm("Are you sure to delete this user?");
 		
 		if(confirmation)
 		{
@@ -34,7 +34,7 @@ jQuery(document).ready(function(){
 			hitURL = baseURL + "reminder/deleteReminder",
 			currentRow = $(this);
 		
-		var confirmation = confirm("Are you sure to delete this reminder ?");
+		var confirmation = confirm("Are you sure to delete this reminder?");
 		
 		if(confirmation)
 		{
@@ -48,6 +48,30 @@ jQuery(document).ready(function(){
 				currentRow.parents('tr').remove();
 				if(data.status = true) { alert("Reminder successfully deleted"); }
 				else if(data.status = false) { alert("Reminder deletion failed"); }
+				else { alert("Access denied..!"); }
+			});
+		}
+	});
+
+	jQuery(document).on("click", ".deleteWorker", function(){
+		var srId = $(this).data("srno"),
+			hitURL = baseURL + "worker/deleteWorker",
+			currentRow = $(this);
+		
+		var confirmation = confirm("Are you sure to delete this worker?");
+		
+		if(confirmation)
+		{
+			jQuery.ajax({
+				type : "POST",
+				dataType : "json",
+				url : hitURL,
+				data : { srId : srId } 
+			}).done(function(data){
+				console.log(data);
+				currentRow.parents('tr').remove();
+				if(data.status = true) { alert("Worker successfully deleted"); }
+				else if(data.status = false) { alert("Worker deletion failed"); }
 				else { alert("Access denied..!"); }
 			});
 		}

@@ -111,6 +111,11 @@
               <i class="fa fa-bell" aria-hidden="true"></i> <span>Reminder</span>
               </a>
             </li>
+            <li class="treeview">
+              <a href="<?php echo base_url(); ?>worker">
+              <i class="fa fa-male" aria-hidden="true"></i> <span>Workers</span>
+              </a>
+            </li>
             <?php
             if($role == ROLE_ADMIN)
             {

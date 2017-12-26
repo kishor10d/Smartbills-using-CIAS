@@ -122,12 +122,12 @@
 <div id="myModal" class="modal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add New Worker</h4>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="<?= base_url().'worker/addNewWorker' ?>">
+            <form method="post" action="<?= base_url().'worker/addNewWorker' ?>">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add New Worker</h4>
+                </div>            
+                <div class="modal-body">
                     <div class="form-group">
                         <label for="itemname">Name:</label>
                         <input type="text" class="form-control" id="name" name="name" required autofocus />
@@ -144,14 +144,12 @@
                         <label for="itemlabour">Salary (per day):</label>
                         <input type="text" class="form-control" id="salary" step="any" name="salary" required />
                     </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary pull-right" value="Submit" />
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -164,12 +162,12 @@ if(!empty($workerRecords))
     <div id="myModal<?= $rec->srno ?>" class="modal" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Edit Workers</h4>
-                </div>
-                <div class="modal-body">
-                    <form method="post" action="<?= base_url() ?>worker/editWorker">
+                <form method="post" action="<?= base_url() ?>worker/editWorker">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Edit Workers</h4>
+                    </div>
+                    <div class="modal-body">
                         <input type="text" class="form-control hidden" id="srno" name="srno" value="<?=$rec->srno ?>" required>
                         <div class="form-group">
                             <label for="itemname">Name:</label>
@@ -187,14 +185,13 @@ if(!empty($workerRecords))
                             <label for="itemlabour">Salary(per day):</label>
                             <input type="text" class="form-control" id="salary" step="any" name="salary" value="<?=$rec->salary ?>" required>
                         </div>
-                        <div class="form-group">
-                            <button class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+                    
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary pull-right" value="Submit" />
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>    
@@ -214,12 +211,12 @@ if(!empty($workerRecords))
     <div id="paysalary<?=$rec->srno?>" class="modal" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Pay Salary</h4>
-                </div>
-                <div class="modal-body">
-                    <form method="post" action="<?= base_url() ?>worker/paySalary">
+                <form method="post" action="<?= base_url() ?>worker/paySalary">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Pay Salary</h4>
+                    </div>
+                    <div class="modal-body">
                         <input type="text" class="form-control hidden" id="workerid" name="workerid" value="<?=$rec->srno?>" required>
                         <div class="form-group">
                             <label for="dateloan">Date of Salary:</label>
@@ -237,14 +234,12 @@ if(!empty($workerRecords))
                             <label for="totalsal">Total Salary:</label>
                             <input type="number" class="form-control" id="totalsal<?=$rec->srno?>" step="any" name="totalsal" readonly value="<?=$rec->salary?>" required>
                         </div>
-                        <div class="form-group">
-                            <button class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary pull-right" value="Submit" />
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
             </div>
 
         </div>
@@ -264,12 +259,12 @@ if(!empty($workerRecords))
 <div id="myModalloantaken" class="modal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Loan Taken</h4>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="<?= base_url() ?>worker/loanTaken">
+            <form method="post" action="<?= base_url() ?>worker/loanTaken">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Loan Taken</h4>
+                </div>
+                <div class="modal-body">
                     <input type="text" required id="workerids" name="workerid" class="hidden">
                     <div class="form-group">
                         <label for="dateloan">Date of loan:</label>
@@ -279,12 +274,12 @@ if(!empty($workerRecords))
                         <label for="loanamount">Loan amount:</label>
                         <input class="form-control" type="number" id="loanamount" name="loanamount" min="1" required autofocus>
                     </div>
-                    <input type="submit" class="btn btn-primary" value="submit" />
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary pull-right" value="submit" />
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -292,12 +287,12 @@ if(!empty($workerRecords))
 <div id="myModalloanpaidoff" class="modal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Loan Paid Off</h4>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="<?= base_url() ?>worker/loanPayOff">
+            <form method="post" action="<?= base_url() ?>worker/loanPayOff">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Loan Paid Off</h4>
+                </div>
+                <div class="modal-body">
                     <input type="text" required id="workersrnos" name="workersrno" class="hidden">
                     <div class="form-group">
                         <label for="dateloan">Date of loan:</label>
@@ -307,12 +302,12 @@ if(!empty($workerRecords))
                         <label for="loanamount">Loan amount:</label>
                         <input class="form-control" type="number" id="paidamount" name="paidamount" min="1" required autofocus>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary pull-right" value="Submit" />
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

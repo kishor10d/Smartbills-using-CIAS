@@ -45,72 +45,72 @@
             </div>
         </div>
         <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header">
-                <h3 class="box-title">Workers List</h3>
-                <div class="box-tools">
-                    <form action="<?php echo base_url() ?>worker" method="POST" id="searchList">
-                        <div class="input-group">
-                          <input type="text" name="searchText" value="<?php echo $searchText; ?>" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
-                          <div class="input-group-btn">
-                            <button class="btn btn-sm btn-default searchList"><i class="fa fa-search"></i></button>
-                          </div>
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Workers List</h3>
+                        <div class="box-tools">
+                            <form action="<?php echo base_url() ?>worker" method="POST" id="searchList">
+                                <div class="input-group">
+                                    <input type="text" name="searchText" value="<?php echo $searchText; ?>" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-default searchList"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                    </form>
-                </div>
-            </div><!-- /.box-header -->
-            <div class="box-body table-responsive no-padding">
-              <table class="table table-hover">
-                <tr>
-                  <th>Name</th>
-                  <th>Phone</th>
-                  <th>Address</th>
-                  <th>Salary (per day)</th>
-                  <th>Loan Taken</th>
-                  <th>Loan Paid</th>
-                  <th>Loan Bal</th>
-                  <th>Pay Salary</th>
-                  <th class="text-center">Actions</th>
-                </tr>
-                <?php
-                if(!empty($workerRecords))
-                {
-                    foreach($workerRecords as $record)
-                    {
-                ?>
-                <tr>
-                    <td><?php echo $record->worker_name ?></td>
-                    <td><?php echo $record->phone ?></td>
-                    <td style="width: 20%"><?php echo $record->address ?></td>
-                    <td><?php echo $record->salary ?></td>
-                    <td><?php echo $record->WLamount ?> 
-                        <button class="btn btn-primary btn-sm">Add Loan</button></td>
-                    <td><?php echo $record->WLPamount ?>
-                        <button class="btn btn-primary btn-sm">Pay Off</button></td>
-                    <td><?php echo ($record->WLamount - $record->WLPamount) ?></td>
-                    <td><?php echo $record->SGamount ?> <br />
-                        <button class="btn btn-primary btn-sm"><i class="fa fa-gear"> </i></button></td>
-                    <td class="text-center">
-                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal<?= $record->srno ?>">
-                            <i class="fa fa-edit" aria-hidden="true"></i>
-                        </button>
-                        <a href="#" data-srno="<?php echo $record->srno; ?>" class="deleteReminder btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
-                    </td>
-                </tr>
-                <?php
-                    }
-                }
-                ?>
-              </table>
+                    </div><!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tr>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Address</th>
+                                <th>Salary (per day)</th>
+                                <th>Loan Taken</th>
+                                <th>Loan Paid</th>
+                                <th>Loan Bal</th>
+                                <th>Pay Salary</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                            <?php
+                            if(!empty($workerRecords))
+                            {
+                                foreach($workerRecords as $record)
+                                {
+                                ?>
+                            <tr>
+                                <td><?php echo $record->worker_name ?></td>
+                                <td><?php echo $record->phone ?></td>
+                                <td style="width: 20%"><?php echo $record->address ?></td>
+                                <td><?php echo $record->salary ?></td>
+                                <td><?php echo $record->WLamount ?> 
+                                    <button class="btn btn-primary btn-sm">Add Loan</button></td>
+                                <td><?php echo $record->WLPamount ?>
+                                    <button class="btn btn-primary btn-sm">Pay Off</button></td>
+                                <td><?php echo ($record->WLamount - $record->WLPamount) ?></td>
+                                <td><?php echo $record->SGamount ?> <br />
+                                    <button class="btn btn-primary btn-sm"><i class="fa fa-gear"> </i></button></td>
+                                <td class="text-center">
+                                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal<?= $record->srno ?>">
+                                        <i class="fa fa-edit" aria-hidden="true"></i>
+                                    </button>
+                                    <a href="#" data-srno="<?php echo $record->srno; ?>" class="deleteReminder btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                                <?php
+                                }
+                            }
+                            ?>
+                        </table>
               
-            </div><!-- /.box-body -->
-            <div class="box-footer clearfix">
-                <?php echo $this->pagination->create_links(); ?>
+                    </div><!-- /.box-body -->
+                    <div class="box-footer clearfix">
+                        <?php echo $this->pagination->create_links(); ?>
+                    </div>
+                </div><!-- /.box -->
             </div>
-          </div><!-- /.box -->
         </div>
-    </div>
     </section>
 </div>
 

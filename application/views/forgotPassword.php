@@ -82,7 +82,7 @@
         
         <form action="<?php echo base_url(); ?>resetPasswordUser" method="post">
           <div class="form-group has-feedback">
-            <input type="email" class="form-control" placeholder="Email" name="login_email" required />
+            <input type="email" class="form-control" placeholder="Email" name="login_email" required autofocus />
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           

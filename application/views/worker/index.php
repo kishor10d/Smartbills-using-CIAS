@@ -130,19 +130,19 @@
                 <form method="post" action="<?= base_url().'worker/addNewWorker' ?>">
                     <div class="form-group">
                         <label for="itemname">Name:</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <input type="text" class="form-control" id="name" name="name" required autofocus />
                     </div>
                     <div class="form-group">
                         <label for="itemprice">Phone:</label>
-                        <input type="number" class="form-control" id="phone" step="any" name="phone" required>
+                        <input type="number" class="form-control" id="phone" step="any" name="phone" required />
                     </div>
                     <div class="form-group">
                         <label for="itemlabour">Address:</label>
-                        <input type="text" class="form-control" id="address" step="any" name="address" required>
+                        <input type="text" class="form-control" id="address" step="any" name="address" required />
                     </div>
                     <div class="form-group">
                         <label for="itemlabour">Salary (per day):</label>
-                        <input type="text" class="form-control" id="salary" step="any" name="salary" required>
+                        <input type="text" class="form-control" id="salary" step="any" name="salary" required />
                     </div>
                     <div class="form-group">
                         <button class="btn btn-primary">Submit</button>
@@ -173,7 +173,7 @@ if(!empty($workerRecords))
                         <input type="text" class="form-control hidden" id="srno" name="srno" value="<?=$rec->srno ?>" required>
                         <div class="form-group">
                             <label for="itemname">Name:</label>
-                            <input type="text" class="form-control" id="name" name="name" value="<?=$rec->worker_name ?>" required>
+                            <input type="text" class="form-control" id="name" name="name" value="<?=$rec->worker_name ?>" required autofocus >
                         </div>
                         <div class="form-group">
                             <label for="itemprice">Phone:</label>
@@ -277,7 +277,7 @@ if(!empty($workerRecords))
                     </div>
                     <div class="form-group">
                         <label for="loanamount">Loan amount:</label>
-                        <input class="form-control" type="number" id="loanamount" name="loanamount" min="1" required>
+                        <input class="form-control" type="number" id="loanamount" name="loanamount" min="1" required autofocus>
                     </div>
                     <input type="submit" class="btn btn-primary" value="submit" />
                 </form>
@@ -305,7 +305,7 @@ if(!empty($workerRecords))
                     </div>
                     <div class="form-group">
                         <label for="loanamount">Loan amount:</label>
-                        <input class="form-control" type="number" id="paidamount" name="paidamount" min="1" required>
+                        <input class="form-control" type="number" id="paidamount" name="paidamount" min="1" required autofocus>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

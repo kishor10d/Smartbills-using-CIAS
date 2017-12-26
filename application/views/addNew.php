@@ -28,7 +28,7 @@
                                 <div class="col-md-6">                                
                                     <div class="form-group">
                                         <label for="fname">Full Name</label>
-                                        <input type="text" class="form-control required" id="fname" name="fname" maxlength="128">
+                                        <input type="text" class="form-control required" id="fname" name="fname" maxlength="128" autofocus>
                                     </div>
                                     
                                 </div>

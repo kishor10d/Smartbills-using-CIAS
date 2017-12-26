@@ -51,7 +51,7 @@ if(!empty($userInfo))
                                 <div class="col-md-6">                                
                                     <div class="form-group">
                                         <label for="fname">Full Name</label>
-                                        <input type="text" class="form-control" id="fname" placeholder="Full Name" name="fname" value="<?php echo $name; ?>" maxlength="128">
+                                        <input type="text" class="form-control" id="fname" placeholder="Full Name" name="fname" value="<?php echo $name; ?>" maxlength="128" autofocus>
                                         <input type="hidden" value="<?php echo $userId; ?>" name="userId" />    
                                     </div>
                                     

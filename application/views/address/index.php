@@ -104,7 +104,7 @@
             <form method="post" action="<?= base_url().'address/addNewAddress' ?>">
                 <div class="form-group">
                     <label for="company">Company Name:</label>
-                    <input type="text" class="form-control" id="company" name="company" required>
+                    <input type="text" class="form-control" id="company" name="company" required autofocus>
                 </div>
                 <div class="form-group">
                     <label for="address">Company Address:</label>
@@ -141,7 +141,7 @@ if(!empty($addressRecords))
                         <div class="form-group">
                             <label for="company">Company Name:</label>
                             <input type="text" class="form-control hidden" id="srno" name="srno" value="<?=$record->srno?>" required>
-                            <input type="text" value="<?=$record->companyname?>" class="form-control" id="company" name="company" required>
+                            <input type="text" value="<?=$record->companyname?>" class="form-control" id="company" name="company" required autofocus>
                         </div>
                         <div class="form-group">
                             <label for="address">Company Address:</label>

@@ -131,7 +131,7 @@
                     </div>
                     <div class="form-group">
                         <label for="text">Reminder Text:</label>
-                        <textarea type="text" class="form-control" id="text" name="reminderText" style="resize: none;" required></textarea>
+                        <textarea type="text" class="form-control" id="text" name="reminderText" style="resize: none;" required autofocus></textarea>
                     </div>
                     <div class="form-group">
                         <label for="period">Set Period:</label>

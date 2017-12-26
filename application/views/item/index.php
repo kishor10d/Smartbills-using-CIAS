@@ -109,7 +109,7 @@
                 <form method="post" action="<?= base_url() ?>item/addNewItem">
                     <div class="form-group">
                         <label for="itemname">Item Name:</label>
-                        <input type="text" class="form-control" id="itemname" name="itemname" required>
+                        <input type="text" class="form-control" id="itemname" name="itemname" required autofocus>
                     </div>
                     <div class="form-group">
                         <label for="itemprice">Item Price:</label>
@@ -155,7 +155,7 @@ if (!empty($itemRecords))
                         </div>
                         <div class="form-group">
                             <label for="itemname">Item Name:</label>
-                            <input type="text" class="form-control" id="itemname" name="itemname" value="<?=$rec->item_name?>" required>
+                            <input type="text" class="form-control" id="itemname" name="itemname" value="<?=$rec->item_name?>" required autofocus>
                         </div>
                         <div class="form-group">
                             <label for="itemprice">Item Price:</label>

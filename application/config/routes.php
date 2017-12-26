@@ -88,5 +88,9 @@ $route['reminder/(:num)'] = "reminder/index/$1";
 $route['worker'] = "worker/index";
 $route['worker/(:num)'] = "worker/index/$1";
 
+/****Address Routes ****/
+$route['address']= "address/index";
+$route['address/(:num)'] = "address/index/$1";
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

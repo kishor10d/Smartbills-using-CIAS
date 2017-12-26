@@ -137,6 +137,12 @@
                 <span>Reports</span>
               </a>
             </li>
+			<li class="treeview">
+              <a href="<?php echo base_url(); ?>address">
+                <i class="fa fa-users"></i>
+                <span>Address</span>
+              </a>
+            </li>
             <?php
             }
             ?>

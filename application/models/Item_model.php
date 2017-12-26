@@ -49,4 +49,33 @@ class Item_model extends CI_Model
 
         return $result;
     }
+
+    /**
+     * This function is used to add new item to system
+     * @param array $itemList : This is item info
+     * @return number $insert_id : This is last inserted id
+     */
+    function addNewItem($itemList)
+    {
+        $this->db->trans_start();
+        $this->db->insert('item_list', $itemList);
+        $insert_id = $this->db->insert_id();
+        $this->db->trans_complete();
+        
+        return $insert_id;
+    }
+
+    /**
+     * This function is used to edit item details
+     * @param array $itemInfo : This is item info
+     * @param number $itemId : This is item id
+     * @return number $insert_id : This is last inserted id
+     */
+    function editItem($itemInfo, $itemId)
+    {
+        $this->db->where("srno", $itemId);
+        $this->db->update('item_list', $itemInfo);
+        
+        return 1;
+    }
 }

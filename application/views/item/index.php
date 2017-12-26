@@ -106,7 +106,7 @@
                 <h4 class="modal-title">Add New Item</h4>
             </div>
             <div class="modal-body">
-                <form method="post">
+                <form method="post" action="<?= base_url() ?>item/addNewItem">
                     <div class="form-group">
                         <label for="itemname">Item Name:</label>
                         <input type="text" class="form-control" id="itemname" name="itemname" required>
@@ -148,7 +148,7 @@ if (!empty($itemRecords))
                     <h4 class="modal-title">Edit Address</h4>
                 </div>
                 <div class="modal-body">
-                    <form method="post">
+                    <form method="post" action="<?= base_url() ?>item/editItem">
                         <div class="form-group hidden">
                             <label for="itemname">Item No:</label>
                             <input type="text" class="form-control" id="itemno" name="itemno" required value="<?=$rec->srno?>">

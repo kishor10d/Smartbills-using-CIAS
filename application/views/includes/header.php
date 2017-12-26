@@ -116,6 +116,11 @@
               <i class="fa fa-male" aria-hidden="true"></i> <span>Workers</span>
               </a>
             </li>
+            <li class="treeview">
+              <a href="<?php echo base_url(); ?>item">
+              <i class="fa fa-male" aria-hidden="true"></i> <span>Item List</span>
+              </a>
+            </li>
             <?php
             if($role == ROLE_ADMIN)
             {

@@ -2,7 +2,7 @@
 <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        <i class="fa fa-bell" aria-hidden="true"></i> Workers
+        <i class="fa fa-male" aria-hidden="true"></i> Workers
         <small>Add, Edit, Delete</small>
       </h1>
     </section>
@@ -326,7 +326,7 @@ if(!empty($workerRecords))
             e.preventDefault();            
             var link = jQuery(this).get(0).href;            
             var value = link.substring(link.lastIndexOf('/') + 1);
-            jQuery("#searchList").attr("action", baseURL + "reminder/" + value);
+            jQuery("#searchList").attr("action", baseURL + "worker/" + value);
             jQuery("#searchList").submit();
         });
         jQuery( ".datepicker" ).datepicker({ format: 'dd-mm-yyyy' });

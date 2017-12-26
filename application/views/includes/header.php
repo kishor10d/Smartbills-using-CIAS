@@ -121,6 +121,12 @@
               <i class="fa fa-list-ol" aria-hidden="true"></i> <span>Item List</span>
               </a>
             </li>
+            <li class="treeview">
+              <a href="<?php echo base_url(); ?>address">
+                <i class="fa fa-users"></i>
+                <span>Address</span>
+              </a>
+            </li>
             <?php
             if($role == ROLE_ADMIN)
             {
@@ -137,12 +143,7 @@
                 <span>Reports</span>
               </a>
             </li>
-			<li class="treeview">
-              <a href="<?php echo base_url(); ?>address">
-                <i class="fa fa-users"></i>
-                <span>Address</span>
-              </a>
-            </li>
+			
             <?php
             }
             ?>

@@ -44,7 +44,7 @@ class Address extends BaseController
             $data['addressRecords'] = $this->address->addressListing($searchText, $returns["page"], $returns["segment"]);
             $this->global['pageTitle'] = 'SmartCIAS : Address';
             
-            $this->loadViews("address", $this->global, $data, NULL);
+            $this->loadViews("address/index", $this->global, $data, NULL);
         }
     }
     /**

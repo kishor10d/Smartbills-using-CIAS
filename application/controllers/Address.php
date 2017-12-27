@@ -38,7 +38,7 @@ class Address extends BaseController
             
             $this->load->library('pagination');
             
-            $count = $this->address->AddressListingCount($searchText);
+            $count = $this->address->addressListingCount($searchText);
 			$returns = $this->paginationCompress("address/", $count, 5 );
             
             $data['addressRecords'] = $this->address->addressListing($searchText, $returns["page"], $returns["segment"]);

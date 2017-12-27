@@ -15,7 +15,7 @@ class Address_model extends CI_Model
      * @param string $searchText : This is optional search text
      * @return number $count : This is row count
      */
-    function AddressListingCount($searchText = '')
+    function addressListingCount($searchText = '')
     {
         $this->db->select('BaseTbl.srno, BaseTbl.companyname, BaseTbl.address, BaseTbl.creationdate');
         $this->db->from('address as BaseTbl');

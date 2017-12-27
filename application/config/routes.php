@@ -96,5 +96,9 @@ $route['address/(:num)'] = "address/index/$1";
 $route['item'] = "item/index";
 $route['item/(:num)'] = "item/index/$1";
 
+/******* Purchase Routes ***********/
+$route['purchase'] = "purchase/index";
+$route['purchase/(:num)'] = "purchase/index/$1";
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

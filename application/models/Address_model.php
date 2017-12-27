@@ -76,4 +76,16 @@ class Address_model extends CI_Model
         return TRUE;
     }
 
+    /**
+     * This function is use to get addresses
+     */
+    function getAddresses()
+    {
+        $this->db->select('BaseTbl.srno, BaseTbl.companyname, BaseTbl.address, BaseTbl.creationdate');
+        $this->db->from('address as BaseTbl');
+        $query = $this->db->get();
+        
+        $result = $query->result();        
+        return $result;
+    }
 }

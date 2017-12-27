@@ -61,4 +61,20 @@ class Purchase_model extends CI_Model
         $result = $query->result();        
         return $result;
     }
+
+    /**
+     * This function is used to add new purchase to system
+     * @param array $purchaseInfo : This is purchase info
+     * @return number $insert_id : This is last inserted id
+     */
+    function addNewPurchase($purchaseInfo)
+    {
+        $this->db->trans_start();
+        $this->db->insert('purchase_'.$this->tableName, $purchaseInfo);        
+        $insert_id = $this->db->insert_id();        
+        $this->db->trans_complete();
+        
+        return $insert_id;
+    }
+    
 }

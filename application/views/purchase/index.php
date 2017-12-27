@@ -39,7 +39,7 @@
             </div>
             <div class="col-md-2 col-xs-12 text-right">
                 <div class="form-group">
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus" aria-hidden="true"></i>  Add Purchase Bill</button>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus" aria-hidden="true"></i>  Add Purchase Details</button>
                 </div>
             </div>
         </div>
@@ -108,6 +108,68 @@
     </section>
 </div>
 
+
+<div id="myModal" class="modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" action="<?= base_url() ?>purchase/addNewPurchase">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add Purchase Details</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label for="billno">Bill No:</label>
+                            <input type="text" class="form-control" id="billno" name="billno" required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="date">Date:</label>
+                            <input type="text" class="form-control datepicker" id="date" name="date" value="<?=date('d-m-Y')?>" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="sellersname">Sellers Name:</label>
+                        <select class="form-control" id="sellersname" name="sellersname" required>
+                            <option value="">Select seller</option>
+                        <?php
+                        foreach($addresses as $rec)
+                        {?>
+                            <option value="<?= $rec->companyname ?>"><?= $rec->companyname ?></option>
+                        <?php } ?>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label for="amount">Amount:</label>
+                            <input type="number" class="form-control" id="amount" step="any" name="amount" min="1" required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="vat">VAT:</label>
+                            <input type="number" class="form-control" id="vat" step="any" name="vat" min="0" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label for="othercharges">Other Charges:</label>
+                            <input type="number" class="form-control" id="othercharges" step="any" min="0" name="othercharges" required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="totalamount">Total Amount:</label>
+                            <input type="number" class="form-control" id="totalamount" step="any" min="0" name="totalamount" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary pull-right" value="Submit" />
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 <script src="<?php echo base_url(); ?>assets/plugins/datepicker/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>
 <script type="text/javascript">
@@ -120,7 +182,7 @@
             jQuery("#searchList").submit();
         });
 
-        jQuery('#datepicker').datepicker({
+        jQuery('.datepicker').datepicker({
           autoclose: true,
           format : "dd-mm-yyyy"
         });

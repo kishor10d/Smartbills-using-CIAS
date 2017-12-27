@@ -126,7 +126,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Add New Worker</h4>
-                </div>            
+                </div>
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="itemname">Name:</label>
@@ -153,6 +153,7 @@
         </div>
     </div>
 </div>
+
 <?php
 if(!empty($workerRecords))
 {
@@ -185,7 +186,6 @@ if(!empty($workerRecords))
                             <label for="itemlabour">Salary(per day):</label>
                             <input type="text" class="form-control" id="salary" step="any" name="salary" value="<?=$rec->salary ?>" required>
                         </div>
-                    
                     </div>
                     <div class="modal-footer">
                         <input type="submit" class="btn btn-primary pull-right" value="Submit" />
@@ -241,9 +241,7 @@ if(!empty($workerRecords))
                     </div>
                 </form>
             </div>
-
         </div>
-
     </div>
 
     <script>
@@ -277,6 +275,11 @@ if(!empty($workerRecords))
                 </div>
                 <div class="modal-footer">
                     <input type="submit" class="btn btn-primary pull-right" value="submit" />
+                        <input class="form-control" type="number" id="loanamount" name="loanamount" min="1" required>
+                    </div>                    
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary pull-right" value="Submit" />
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
                 </div>
             </form>
@@ -328,11 +331,11 @@ if(!empty($workerRecords))
     });
 
     function addloan(srno){
-        $('#workerids').val(srno);
-        $('#myModalloantaken').modal('show');
+        jQuery('#workerids').val(srno);
+        jQuery('#myModalloantaken').modal('show');
     }
     function payoff(srno){
-        $('#workersrnos').val(srno);
-        $('#myModalloanpaidoff').modal('show');
+        jQuery('#workersrnos').val(srno);
+        jQuery('#myModalloanpaidoff').modal('show');
     }
 </script>

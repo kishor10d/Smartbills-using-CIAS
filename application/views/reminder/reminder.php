@@ -114,14 +114,13 @@
 
 <div id="myModal" class="modal" role="dialog">
     <div class="modal-dialog">
-        <!-- Modal content-->
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add New Reminder</h4>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="<?= base_url().'reminder/addNewReminder' ?>" >
+            <form method="post" action="<?= base_url().'reminder/addNewReminder' ?>" >
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add New Reminder</h4>
+                </div>
+                <div class="modal-body">                    
                     <div class="form-group">
                         <label for="date">Date:</label>
                         <div class="input-group date">
@@ -142,14 +141,12 @@
                             <option value="y">Yearly</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>            
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary pull-right" value="Submit" />
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

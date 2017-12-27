@@ -101,12 +101,12 @@
 <div id="myModal" class="modal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add New Item</h4>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="<?= base_url() ?>item/addNewItem">
+        <form method="post" action="<?= base_url() ?>item/addNewItem">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add New Item</h4>
+                </div>
+                <div class="modal-body">
                     <div class="form-group">
                         <label for="itemname">Item Name:</label>
                         <input type="text" class="form-control" id="itemname" name="itemname" required autofocus>
@@ -119,14 +119,12 @@
                         <label for="itemlabour">Labour:</label>
                         <input type="number" class="form-control" id="itemlabour" step="any" name="itemlabour" required>
                     </div>
-                    <div class="form-group">
-                        <input type="submit" value="Submit" class="btn btn-primary" />
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" value="Submit" class="btn btn-primary pull-right" />
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -143,12 +141,12 @@ if (!empty($itemRecords))
         <div class="modal-dialog">
 
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Edit Address</h4>
-                </div>
-                <div class="modal-body">
-                    <form method="post" action="<?= base_url() ?>item/editItem">
+                <form method="post" action="<?= base_url() ?>item/editItem">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Edit Address</h4>
+                    </div>
+                    <div class="modal-body">                        
                         <div class="form-group hidden">
                             <label for="itemname">Item No:</label>
                             <input type="text" class="form-control" id="itemno" name="itemno" required value="<?=$rec->srno?>">
@@ -165,14 +163,12 @@ if (!empty($itemRecords))
                             <label for="itemlabour">Labour:</label>
                             <input type="number" class="form-control" id="itemlabour" step="any" value="<?=$rec->item_labour?>" name="itemlabour" required>
                         </div>
-                        <div class="form-group">
-                            <input type="submit" value="Submit" class="btn btn-primary" />
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" value="Submit" class="btn btn-primary pull-right" />
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>        

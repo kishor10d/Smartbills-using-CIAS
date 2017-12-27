@@ -76,5 +76,55 @@ class Purchase_model extends CI_Model
         
         return $insert_id;
     }
+
+    /**
+     * This function is used to update the purchase details
+     * @param array $userInfo : This is purchase updated information
+     * @param number $purchaseId : This is purchase id
+     */
+    function updatePurchase($purchaseInfo, $purchaseId)
+    {
+        $this->db->where('srno', $purchaseId);
+        $this->db->update('purchase_'.$this->tableName, $purchaseInfo);
+        
+        return TRUE;
+    }
+
+    /**
+     * This function used to record purchase payments
+     * @param array $paidInfo : This is purchase payment info
+     * @param number $srno : This is sr no
+     */
+    function purchasePaid($purchasePaidInfo, $srNoPurchase)
+    {
+        $purchasePaidInfo["srnoofpurchase_".$this->tableName] = $srNoPurchase;
+
+        $this->db->trans_start();
+        $this->db->insert('purchase_'.$this->tableName.'_paid', $purchasePaidInfo);        
+        $insert_id = $this->db->insert_id();        
+        $this->db->trans_complete();
+        
+        return $insert_id;
+    }
     
+    function getPurchasePaid($srNoPurchase)
+    {
+        $this->db->select("SUM(BaseTbl.paid_amount) as amount");
+        $this->db->from('purchase_'.$this->tableName.'_paid as BaseTbl');
+        $this->db->group_by("BaseTbl.srnoofpurchase_".$this->tableName);
+        $this->db->where("BaseTbl.srnoofpurchase_".$this->tableName, $srNoPurchase);
+        $query = $this->db->get();
+        
+        $result = $query->row();
+        
+        return empty($result) ? 0 : $result->amount;
+    }
+
+    function deletePurchase($srId)
+    {
+        $this->db->where('srno', $srId);
+        $this->db->delete('purchase_'.$this->tableName);
+
+        return $this->db->affected_rows();
+    }
 }

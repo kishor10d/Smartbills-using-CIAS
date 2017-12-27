@@ -39,9 +39,18 @@ class Purchase extends BaseController
             $this->load->library('pagination');
             
             $count = $this->purchase->purchaseListingCount($searchText);
-			$returns = $this->paginationCompress("purchase/", $count, 5 );
+            $returns = $this->paginationCompress("purchase/", $count, 5 );
             
-            $data['purchaseRecords'] = $this->purchase->purchaseListing($searchText, $returns["page"], $returns["segment"]);
+            $resultRecords = $this->purchase->purchaseListing($searchText, $returns["page"], $returns["segment"]);
+
+            $purchaseRecords = array();
+
+            foreach($resultRecords as $rec){
+                $rec->payment = $this->purchase->getPurchasePaid($rec->srno);
+                array_push($purchaseRecords, $rec);
+            }
+            
+            $data['purchaseRecords'] = $purchaseRecords;
             $data['addresses'] = $this->address->getAddresses();
             $this->global['pageTitle'] = 'SmartCIAS : Purchase Bills';
             
@@ -49,6 +58,9 @@ class Purchase extends BaseController
         }
     }
 
+    /**
+     * This function used to add new purchase details and update new purchase details
+     */
     function addNewPurchase()
     {
         if($this->isAdmin() == TRUE)
@@ -57,9 +69,6 @@ class Purchase extends BaseController
         }
         else
         {
-            // pre($this->input->post());
-            // die;
-
             $this->load->library('form_validation');
             
             $this->form_validation->set_rules('billno','Bill No','trim|required|max_length[20]');
@@ -76,28 +85,94 @@ class Purchase extends BaseController
             else
             {
                 $post = $this->input->post();
-                pre($post);
                 $purchaseInfo = array('bill_no'=>$post["billno"],
                                     'pur_date'=>date('Y-m-d', strtotime($post["date"])),
                                     'party_name'=>$post["sellersname"],
                                     'total'=>$post["amount"],
                                     'tax'=>$post["vat"],
                                     'othercharges'=>$post["othercharges"],
-                                    'grand_total'=>$post["totalamount"]);
+                                    'grand_total'=>$post["totalamount"]);                
 
-                $result = $this->purchase->addNewPurchase($purchaseInfo);
-
-                if($result > 0)
+                if(isset($post["srno"]))
                 {
-                    $this->session->set_flashdata('success', 'Purchase details created successfully');
+                    $result = $this->purchase->updatePurchase($purchaseInfo, $post["srno"]);
+
+                    if($result > 0) {
+                        $this->session->set_flashdata('success', 'Purchase details updated successfully');
+                    } else {
+                        $this->session->set_flashdata('error', 'Purchase details updation failed');
+                    }
                 }
                 else
                 {
-                    $this->session->set_flashdata('error', 'Purchase details creation failed');
+                    $result = $this->purchase->addNewPurchase($purchaseInfo);
+
+                    if($result > 0){
+                        $this->session->set_flashdata('success', 'Purchase details created successfully');
+                    } else {
+                        $this->session->set_flashdata('error', 'Purchase details creation failed');
+                    }
                 }
 
                 redirect('purchase');
             }
+        }
+    }
+
+    function purchasePaid()
+    {
+        if($this->isAdmin() == TRUE)
+        {
+            $this->loadThis();
+        }
+        else
+        {
+            $this->load->library('form_validation');
+            
+            $this->form_validation->set_rules('paiddate','Bill No','trim|required|max_length[20]');
+            $this->form_validation->set_rules('paidamount','Date','trim|required|max_length[20]');
+            $this->form_validation->set_rules('details','Seller Name','trim|required|max_length[128]');
+            if($this->form_validation->run() == FALSE)
+            {
+                $this->index();
+            }
+            else
+            {
+                $post = $this->input->post();
+                $purchasePaidInfo = array('paid_date'=>date('Y-m-d', strtotime($post["paiddate"])),
+                                    'paid_amount'=>$post["paidamount"],
+                                    'details'=>$post["details"],
+                                    'datetime'=>date('Y-m-d H:i:s'));
+
+                $result = $this->purchase->purchasePaid($purchasePaidInfo, $post["srnopurchase"]);
+
+                if($result > 0){
+                    $this->session->set_flashdata('success', 'Purchase payment successfully');
+                } else {
+                    $this->session->set_flashdata('error', 'Purchase payment failed');
+                }
+
+                redirect('purchase');
+            }
+        }
+    }
+
+    /**
+     * This function is used to delete the purchase entry using id
+     * @return boolean $result : TRUE / FALSE
+     */
+    function deletePurchase()
+    {
+        if($this->isAdmin() == TRUE)
+        {
+            echo(json_encode(array('status'=>'access')));
+        }
+        else
+        {
+            $srId = $this->input->post('srId');
+            $result = $this->purchase->deletePurchase($srId);
+            if ($result > 0) { echo(json_encode(array('status'=>TRUE))); }
+            else { echo(json_encode(array('status'=>FALSE))); }
         }
     }
 

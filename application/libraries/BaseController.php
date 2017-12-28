@@ -101,6 +101,8 @@ class BaseController extends CI_Controller {
      * @return {null} $result : null
      */
     function loadViews($viewName = "", $headerInfo = NULL, $pageInfo = NULL, $footerInfo = NULL){
+		
+		if(!typeDecision()) { $headerInfo["type"] = ""; }
 
         $this->load->view('includes/header', $headerInfo);
         $this->load->view($viewName, $pageInfo);

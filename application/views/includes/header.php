@@ -112,6 +112,11 @@
               </a>
             </li>
             <li class="treeview">
+              <a href="<?php echo base_url(); ?>purchase">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span>Purchase</span>
+              </a>
+            </li>
+            <li class="treeview">
               <a href="<?php echo base_url(); ?>worker">
               <i class="fa fa-male" aria-hidden="true"></i> <span>Workers</span>
               </a>

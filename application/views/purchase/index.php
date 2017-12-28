@@ -2,7 +2,7 @@
 <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        <i class="fa fa-bell" aria-hidden="true"></i> Purchase Bills
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i> Purchase Bills
         <small>Add, Edit, Delete</small>
       </h1>
     </section>

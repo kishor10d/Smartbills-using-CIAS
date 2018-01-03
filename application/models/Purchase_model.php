@@ -127,4 +127,29 @@ class Purchase_model extends CI_Model
 
         return $this->db->affected_rows();
     }
+
+
+    function getPurchaseParties()
+    {
+        $this->db->select("BaseTbl.party_name");
+        $this->db->from('purchase_'.$this->tableName.' as BaseTbl');
+        $this->db->order_by("BaseTbl.party_name", "ASC");
+        $this->db->group_by('BaseTbl.party_name');
+        $query = $this->db->get();
+        
+        $result = $query->result();
+        return $result;
+    }
+
+    function getPurchasePartiesReport()
+    {
+        $this->db->select("BaseTbl.srno, BaseTbl.bill_no, BaseTbl.pur_date, BaseTbl.total, BaseTbl.tax, BaseTbl.othercharges, BaseTbl.grand_total, BaseTbl.paid, BaseTbl.cheque_no, BaseTbl.party_name");
+        $this->db->from('purchase_'.$this->tableName.' as BaseTbl');
+        $this->db->order_by("BaseTbl.party_name", "ASC");
+        $this->db->group_by('BaseTbl.party_name');
+        $query = $this->db->get();
+        
+        $result = $query->result();
+        return $result;
+    }
 }

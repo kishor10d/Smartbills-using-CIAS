@@ -117,6 +117,21 @@
               </a>
             </li>
             <li class="treeview">
+              <a href="<?php echo base_url(); ?>sales">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span>Sales</span>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href="<?php echo base_url(); ?>purchase-report">
+                <i class="fa fa-area-chart" aria-hidden="true"></i> <span>Purchase Report</span>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href="<?php echo base_url(); ?>sales-report">
+                <i class="fa fa-line-chart" aria-hidden="true"></i> <span>Sales Report</span>
+              </a>
+            </li>
+            <li class="treeview">
               <a href="<?php echo base_url(); ?>worker">
               <i class="fa fa-male" aria-hidden="true"></i> <span>Workers</span>
               </a>

@@ -21,4 +21,17 @@ class Report extends BaseController
         $this->isLoggedIn();   
     }
     
+    public function purchaseIndex($partyName = "", $partyNameEncoded = "")
+    {
+        $data["purchaseParties"] = $this->purchase->getPurchaseParties();
+        $data["selected"] = $partyName;
+        $data["selected2"] = urldecode($partyNameEncoded);
+
+        $data["purchasePartyReport"] = $this->purchase->getPurchasePartiesReport(urldecode($partyNameEncoded));
+
+        $this->global['pageTitle'] = 'SmartCIAS : Purchase Report';
+        
+            
+        $this->loadViews("report/purchase", $this->global, $data, NULL);
+    }
 }

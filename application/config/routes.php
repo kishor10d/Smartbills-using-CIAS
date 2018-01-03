@@ -100,5 +100,12 @@ $route['item/(:num)'] = "item/index/$1";
 $route['purchase'] = "purchase/index";
 $route['purchase/(:num)'] = "purchase/index/$1";
 
+/******* Report Routes ***********/
+$route['purchase-report'] = "report/purchaseIndex";
+$route['purchase-report/(:any)'] = "report/purchaseIndex/$1";
+$route['purchase-report/(:any)/(:any)'] = "report/purchaseIndex/$1/$2";
+$route['sales-report'] = "report/salesIndex";
+
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

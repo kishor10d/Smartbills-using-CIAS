@@ -213,9 +213,9 @@ class Purchase_model extends CI_Model
     function getPurchasePartiesData($partySrNo)
     {
 
-        $this->db->select("BaseTbl.srno, BaseTbl.srnoofpurchase_precision, BaseTbl.paid_date, BaseTbl.paid_amount, BaseTbl.details");
+        $this->db->select("BaseTbl.srno, BaseTbl.srnoofpurchase_".$this->tableName.", BaseTbl.paid_date, BaseTbl.paid_amount, BaseTbl.details");
         $this->db->from('purchase_'.$this->tableName.'_paid as BaseTbl');
-        $this->db->join('purchase_'.$this->tableName.' as P', 'BaseTbl.srnoofpurchase_precision = P.srno');
+        $this->db->join('purchase_'.$this->tableName.' as P', 'BaseTbl.srnoofpurchase_'.$this->tableName.' = P.srno');
         $this->db->where('P.srno', $partySrNo);
         $this->db->order_by("P.party_name", "ASC");
         $query = $this->db->get();

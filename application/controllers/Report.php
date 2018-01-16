@@ -21,6 +21,11 @@ class Report extends BaseController
         $this->isLoggedIn();   
     }
     
+    /**
+     * This function is used to show the purchase report for all or by party name
+     * @param string $partyName : This is slug of party name
+     * @param string $partyNameEncoded : This is original party name
+     */
     public function purchaseIndex($partyName = "", $partyNameEncoded = "")
     {
         $purchaseParties = $this->purchase->getPurchaseParties();
@@ -35,8 +40,6 @@ class Report extends BaseController
 
         $data["paidData"] = $this->purchase->paidData($purchasePartiesResult);
 
-        // pre($data["paidData"]);
-
         $data["grabbed"] = $this->grabData($purchasePartiesResult);        
 
         $this->global['pageTitle'] = 'SmartCIAS : Purchase Report';
@@ -44,6 +47,10 @@ class Report extends BaseController
         $this->loadViews("report/purchase", $this->global, $data, NULL);
     }
 
+    /**
+     * This function use to grab data for purchase report
+     * @param array $purchasePartiesResult : This is lisf of purchase parties
+     */
     function grabData($purchasePartiesResult)
     {
         $grabbed = array();
@@ -77,7 +84,6 @@ class Report extends BaseController
                 {
                     $innerResult = $res;
                     $totalPaid = $this->purchase->totalPaid($res->srno);
-                    // pre($totalPaid);
                     $total = round((float)$res->total + (float)$res->tax + (float)$res->othercharges);
                     $innerResult->row_total = $total;
                     $innerResult->row_total_paid = $totalPaid;

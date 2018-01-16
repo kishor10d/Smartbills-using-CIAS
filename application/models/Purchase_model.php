@@ -107,6 +107,10 @@ class Purchase_model extends CI_Model
         return $insert_id;
     }
     
+    /**
+     * This function used to get sum of paid amount by id
+     * @param number $srNoPurchase : This is paid amount id
+     */
     function getPurchasePaid($srNoPurchase)
     {
         $this->db->select("SUM(BaseTbl.paid_amount) as amount");
@@ -120,6 +124,10 @@ class Purchase_model extends CI_Model
         return empty($result) ? 0 : $result->amount;
     }
 
+    /**
+     * This function used to delete purchase by id
+     * @param number $srId : This is purchase id
+     */
     function deletePurchase($srId)
     {
         $this->db->where('srno', $srId);
@@ -128,7 +136,10 @@ class Purchase_model extends CI_Model
         return $this->db->affected_rows();
     }
 
-
+    /**
+     * This function is used to get purchase parties
+     * @param array $partyName : This is party array
+     */
     function getPurchaseParties($partyName = NULL)
     {
         $this->db->distinct();
@@ -145,18 +156,11 @@ class Purchase_model extends CI_Model
         return $result;
     }
 
-    function getPurchasePartiesReport()
-    {
-        $this->db->select("BaseTbl.srno, BaseTbl.bill_no, BaseTbl.pur_date, BaseTbl.total, BaseTbl.tax, BaseTbl.othercharges, BaseTbl.grand_total, BaseTbl.paid, BaseTbl.cheque_no, BaseTbl.party_name");
-        $this->db->from('purchase_'.$this->tableName.' as BaseTbl');
-        $this->db->order_by("BaseTbl.party_name", "ASC");
-        $this->db->group_by('BaseTbl.party_name');
-        $query = $this->db->get();
-        
-        $result = $query->result();
-        return $result;
-    }
-
+    /**
+     * This function is used to get purchase date start and end by party name
+     * @param string $partyName : This is party name
+     * @param string $sort : This is sort method
+     */
     function getDateByPartyName($partyName, $sort = 'ASC')
     {
         $this->db->select("BaseTbl.pur_date");
@@ -171,6 +175,12 @@ class Purchase_model extends CI_Model
         return $result->pur_date;
     }
 
+    /**
+     * This function used to get purchase from startday to endday
+     * @param string $partyName : This is party name
+     * @param date $startday : This is startday date
+     * @param date $endday : This is endday date
+     */
     function selectBetweenStartEnd($partyName, $startday, $endday)
     {
         $this->db->select("BaseTbl.*");
@@ -183,6 +193,10 @@ class Purchase_model extends CI_Model
         return $query->result();
     }
 
+    /**
+     * This function used to get total paid amount
+     * @param number $srno : This is paid id
+     */
     function totalPaid($srno)
     {
         $this->db->select("COALESCE(SUM(BaseTbl.paid_amount), 0) as paid_total");
@@ -193,6 +207,10 @@ class Purchase_model extends CI_Model
         return $query->row()->paid_total;
     }
 
+    /**
+     * This function used to get records using party name
+     * @param array $partyName : This is party name array
+     */
     function getPartyIdByName($partyName)
     {
         $parties = array();
@@ -210,6 +228,10 @@ class Purchase_model extends CI_Model
         return $result;
     }
 
+    /**
+     * This function used to get purchase data for report
+     * @param array $partySrNo : Party purchase ids
+     */
     function getPurchasePartiesData($partySrNo)
     {
 
@@ -224,6 +246,10 @@ class Purchase_model extends CI_Model
         return $result;
     }
 
+    /**
+     * This funciton is used to grab paid data
+     * @param array $purchasePartiesResult : This is list of parties
+     */
     function paidData($purchasePartiesResult)
     {
         $allParties = array();

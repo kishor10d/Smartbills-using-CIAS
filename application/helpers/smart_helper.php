@@ -153,7 +153,7 @@ if(!function_exists('typeDecision'))
 {
     function typeDecision()
     {
-        $urlArray = array("purchase");
+        $urlArray = array("purchase", "purchase-report");
         $url = substr(uri_string(), 0, strpos(uri_string(), '/') ? strpos(uri_string(), '/') : strlen(uri_string()));
         return in_array($url, $urlArray);
     }

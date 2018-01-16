@@ -97,7 +97,7 @@
                     ?>
                     <div class="box-footer clearfix">
                         <div class="row">
-                            <div class="col-md-3"><?= $par->party_name ?> Company Report</div>
+                            <div class="col-md-3">Company Report (<?= $par->party_name ?>)</div>
                             <div class="col-md-3">Total : <?= $companyData["companyTotal"] ?></div>
                             <div class="col-md-3">Paid : <?= $companyData["companyPaidTotal"] ?></div>
                             <div class="col-md-3">Bal : <?= $companyData["companyTotal"] - $companyData["companyPaidTotal"] ?></div>

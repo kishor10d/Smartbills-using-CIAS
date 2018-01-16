@@ -117,8 +117,8 @@
               </a>
             </li>
             <li class="treeview">
-              <a href="<?php echo base_url(); ?>sales">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span>Sales</span>
+              <a href="<?php echo base_url(); ?>sale">
+                <i class="fa fa-money" aria-hidden="true"></i> <span>Sales</span>
               </a>
             </li>
             <li class="treeview">
@@ -127,7 +127,7 @@
               </a>
             </li>
             <li class="treeview">
-              <a href="<?php echo base_url(); ?>sales-report">
+              <a href="<?php echo base_url(); ?>sale-report">
                 <i class="fa fa-line-chart" aria-hidden="true"></i> <span>Sales Report</span>
               </a>
             </li>

@@ -4,7 +4,7 @@ require APPPATH . '/libraries/BaseController.php';
 
 /**
  * Class : Purchase (PurchaseController)
- * User Class to control all purchase related things
+ * Purchase Class to control all purchase related things
  * @author : Kishor Mali
  * @version : 1.1
  * @since : 27 December 2017

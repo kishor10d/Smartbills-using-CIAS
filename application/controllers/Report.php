@@ -33,6 +33,10 @@ class Report extends BaseController
         if(!empty($partyName) && !empty($partyNameEncoded)){ $purchasePartiesResult = $this->purchase->getPurchaseParties(urldecode($partyNameEncoded)); }
         else { $purchasePartiesResult = $this->purchase->getPurchaseParties(); }
 
+        $data["paidData"] = $this->purchase->paidData($purchasePartiesResult);
+
+        // pre($data["paidData"]);
+
         $data["grabbed"] = $this->grabData($purchasePartiesResult);        
 
         $this->global['pageTitle'] = 'SmartCIAS : Purchase Report';

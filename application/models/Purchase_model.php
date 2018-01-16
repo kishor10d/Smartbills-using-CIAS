@@ -131,6 +131,7 @@ class Purchase_model extends CI_Model
 
     function getPurchaseParties($partyName = NULL)
     {
+        $this->db->distinct();
         $this->db->select("BaseTbl.party_name");
         $this->db->from('purchase_'.$this->tableName.' as BaseTbl');
         $this->db->order_by("BaseTbl.party_name", "ASC");
@@ -190,5 +191,47 @@ class Purchase_model extends CI_Model
         $query = $this->db->get();
 
         return $query->row()->paid_total;
+    }
+
+    function getPartyIdByName($partyName)
+    {
+        $parties = array();
+        foreach ($partyName as $par) {
+            array_push($parties, $par->party_name);
+        }
+
+        $this->db->select("BaseTbl.srno, BaseTbl.party_name");
+        $this->db->from('purchase_'.$this->tableName.' as BaseTbl');
+        $this->db->order_by("BaseTbl.party_name", "ASC");
+        $this->db->where_in('BaseTbl.party_name', $parties);
+        $query = $this->db->get();
+        
+        $result = $query->result();
+        return $result;
+    }
+
+    function getPurchasePartiesData($partySrNo)
+    {
+
+        $this->db->select("BaseTbl.srno, BaseTbl.srnoofpurchase_precision, BaseTbl.paid_date, BaseTbl.paid_amount, BaseTbl.details");
+        $this->db->from('purchase_'.$this->tableName.'_paid as BaseTbl');
+        $this->db->join('purchase_'.$this->tableName.' as P', 'BaseTbl.srnoofpurchase_precision = P.srno');
+        $this->db->where('P.srno', $partySrNo);
+        $this->db->order_by("P.party_name", "ASC");
+        $query = $this->db->get();
+        
+        $result = $query->result();
+        return $result;
+    }
+
+    function paidData($purchasePartiesResult)
+    {
+        $allParties = array();
+        $result = $this->getPartyIdByName($purchasePartiesResult);
+        
+        foreach ($result as $res) {
+            $allParties[$res->srno] = $this->getPurchasePartiesData($res->srno);
+        }
+        return $allParties;
     }
 }

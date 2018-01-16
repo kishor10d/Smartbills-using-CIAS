@@ -76,7 +76,9 @@
                                 <td><?= $cRow[$j]->row_total ?></td>
                                 <td><?= $cRow[$j]->row_total_paid ?></td>
                                 <td><?= $cRow[$j]->row_total - $cRow[$j]->row_total_paid ?></td>
-                                <td></td>
+                                <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal<?=$cRow[$j]->srno?>">
+                                    <i class="fa fa-cog" aria-hidden="true">
+                                </td>
                                 </tr>
                                 <?php
                             }
@@ -122,6 +124,62 @@
         </div>
     </section>
 </div>
+
+<?php
+foreach ($paidData as $paidKey=>$paidValue)
+{
+    ?>
+    <div id="myModal<?=$paidKey?>" class="modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Details</h4>
+                </div>
+                <div class="modal-body">
+                <?php
+                if(!empty($paidValue))
+                {
+                    ?>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Paid Date</th>
+                                <th>Paid Amount</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        foreach ($paidValue as $values) {
+                            
+                            ?>
+                            <tr>
+                                <td><?=date('Y-m-d', strtotime($values->paid_date))?></td>
+                                <td><?=$values->paid_amount?></td>
+                                <td><?=$values->details?></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                        </tbody>
+                    </table>
+                <?php
+                } else {
+                    ?><h3>No paid entries found</h3><?php
+                }
+                ?>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+?>
+
 
 <script type="text/javascript">
 

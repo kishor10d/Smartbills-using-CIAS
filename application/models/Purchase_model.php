@@ -129,12 +129,15 @@ class Purchase_model extends CI_Model
     }
 
 
-    function getPurchaseParties()
+    function getPurchaseParties($partyName = NULL)
     {
         $this->db->select("BaseTbl.party_name");
         $this->db->from('purchase_'.$this->tableName.' as BaseTbl');
         $this->db->order_by("BaseTbl.party_name", "ASC");
         $this->db->group_by('BaseTbl.party_name');
+        if($partyName !== NULL){
+            $this->db->where('BaseTbl.party_name', $partyName);
+        }
         $query = $this->db->get();
         
         $result = $query->result();
@@ -151,5 +154,41 @@ class Purchase_model extends CI_Model
         
         $result = $query->result();
         return $result;
+    }
+
+    function getDateByPartyName($partyName, $sort = 'ASC')
+    {
+        $this->db->select("BaseTbl.pur_date");
+        $this->db->from('purchase_'.$this->tableName.' as BaseTbl');
+        $this->db->where('BaseTbl.party_name', $partyName);
+        $this->db->order_by("BaseTbl.pur_date", $sort);
+        $this->db->limit(1);
+        $query = $this->db->get();
+
+        $result = $query->row();
+
+        return $result->pur_date;
+    }
+
+    function selectBetweenStartEnd($partyName, $startday, $endday)
+    {
+        $this->db->select("BaseTbl.*");
+        $this->db->from('purchase_'.$this->tableName.' as BaseTbl');
+        $this->db->where('BaseTbl.party_name', $partyName);
+        $this->db->where("BaseTbl.pur_date >=", $startday);
+        $this->db->where("BaseTbl.pur_date <=", $endday);
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
+    function totalPaid($srno)
+    {
+        $this->db->select("COALESCE(SUM(BaseTbl.paid_amount), 0) as paid_total");
+        $this->db->from('purchase_'.$this->tableName.'_paid as BaseTbl');
+        $this->db->where('BaseTbl.srnoofpurchase_'.$this->tableName, $srno);
+        $query = $this->db->get();
+
+        return $query->row()->paid_total;
     }
 }

@@ -56,10 +56,10 @@ class Report extends BaseController
         $grabbed = array();
         $allTotal = 0;
         $allPaidTotal = 0;
+        $perParty = array();
 
         foreach ($purchasePartiesResult as $par)
         {
-            $perParty = array();
             $perPartyRow = array();
             $companyTotal = 0;
             $companyPaidTotal = 0;
@@ -111,8 +111,6 @@ class Report extends BaseController
             $grabbed[$par->party_name] = $perParty;
             $allTotal = $allTotal + $companyTotal;
             $allPaidTotal = $allPaidTotal + $companyPaidTotal;
-            
-            
         }
         $grabbed["count"] = count($perParty);
         $grabbed["allTotal"] = $allTotal;

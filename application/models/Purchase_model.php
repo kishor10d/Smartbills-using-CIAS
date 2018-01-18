@@ -213,18 +213,22 @@ class Purchase_model extends CI_Model
      */
     function getPartyIdByName($partyName)
     {
+        $result = array();
         $parties = array();
         foreach ($partyName as $par) {
             array_push($parties, $par->party_name);
         }
 
-        $this->db->select("BaseTbl.srno, BaseTbl.party_name");
-        $this->db->from('purchase_'.$this->tableName.' as BaseTbl');
-        $this->db->order_by("BaseTbl.party_name", "ASC");
-        $this->db->where_in('BaseTbl.party_name', $parties);
-        $query = $this->db->get();
-        
-        $result = $query->result();
+        if(!empty($parties))
+        {
+            $this->db->select("BaseTbl.srno, BaseTbl.party_name");
+            $this->db->from('purchase_'.$this->tableName.' as BaseTbl');
+            $this->db->order_by("BaseTbl.party_name", "ASC");
+            $this->db->where_in('BaseTbl.party_name', $parties);
+            $query = $this->db->get();
+            
+            $result = $query->result();
+        }
         return $result;
     }
 

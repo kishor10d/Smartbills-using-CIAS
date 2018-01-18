@@ -20,7 +20,8 @@ class Address_model extends CI_Model
         $this->db->select('BaseTbl.srno, BaseTbl.companyname, BaseTbl.address, BaseTbl.creationdate');
         $this->db->from('address as BaseTbl');
         if(!empty($searchText)) {
-            $likeCriteria = "(BaseTbl.address LIKE '%".$searchText."%')";
+            $likeCriteria = "(BaseTbl.address LIKE '%".$searchText."%'
+                            OR  BaseTbl.companyname  LIKE '%".$searchText."%')";
             $this->db->where($likeCriteria);
         }
         $query = $this->db->get();
@@ -40,7 +41,8 @@ class Address_model extends CI_Model
         $this->db->select('BaseTbl.srno, BaseTbl.companyname, BaseTbl.address, BaseTbl.creationdate');
         $this->db->from('address as BaseTbl');
         if(!empty($searchText)) {
-            $likeCriteria = "(BaseTbl.address LIKE '%".$searchText."%')";
+            $likeCriteria = "(BaseTbl.address LIKE '%".$searchText."%'
+                            OR  BaseTbl.companyname  LIKE '%".$searchText."%')";
             $this->db->where($likeCriteria);
         }
         $this->db->limit($page, $segment);

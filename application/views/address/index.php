@@ -96,28 +96,27 @@
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Add New Address</h4>
-        </div>
-        <div class="modal-body">
             <form method="post" action="<?= base_url().'address/addNewAddress' ?>">
-                <div class="form-group">
-                    <label for="company">Company Name:</label>
-                    <input type="text" class="form-control" id="company" name="company" required autofocus>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add New Address</h4>
                 </div>
-                <div class="form-group">
-                    <label for="address">Company Address:</label>
-                    <input type="text" class="form-control" id="address" name="address" required>
+                <div class="modal-body">
+                
+                    <div class="form-group">
+                        <label for="company">Company Name:</label>
+                        <input type="text" class="form-control" id="company" name="company" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Company Address:</label>
+                        <input type="text" class="form-control" id="address" name="address" required>
+                    </div>            
                 </div>
-                <div class="form-group">
-                    <button class="btn btn-primary">Submit</button>
+                <div class="modal-footer">
+                    <input type="Submit" value="Submit" class="btn btn-primary pull-right" />
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
                 </div>
             </form>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
         </div>
     </div>
 </div>
@@ -132,12 +131,12 @@ if(!empty($addressRecords))
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Update Address</h4>
-                </div>
-                <div class="modal-body">
-                    <form method="post" action="<?= base_url().'address/updateAddress' ?>">
+                <form method="post" action="<?= base_url().'address/updateAddress' ?>">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Update Address</h4>
+                    </div>
+                    <div class="modal-body">                        
                         <div class="form-group">
                             <label for="company">Company Name:</label>
                             <input type="text" class="form-control hidden" id="srno" name="srno" value="<?=$record->srno?>" required>
@@ -146,15 +145,13 @@ if(!empty($addressRecords))
                         <div class="form-group">
                             <label for="address">Company Address:</label>
                             <input type="text" value="<?=$record->address?>" class="form-control" id="address" name="address" required>
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+                        </div>                        
+                    </div>
+                    <div class="modal-footer">
+                        <input type="Submit" value="Submit" class="btn btn-primary pull-right" />
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

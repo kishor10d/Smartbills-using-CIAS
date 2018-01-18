@@ -84,7 +84,7 @@ class Address extends BaseController
                     $this->session->set_flashdata('error', 'Address creation failed');
                 }
                 
-                redirect('Address');
+                redirect('address');
             }
         }
     }

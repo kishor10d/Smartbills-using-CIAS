@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Oct 07, 2017 at 10:53 PM
--- Server version: 5.7.19-0ubuntu0.16.04.1
--- PHP Version: 7.0.22-0ubuntu0.16.04.1
+-- Host: 127.0.0.1
+-- Generation Time: Jan 18, 2018 at 09:22 AM
+-- Server version: 10.1.16-MariaDB
+-- PHP Version: 5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -186,7 +186,7 @@ CREATE TABLE `purchase_fine` (
   `srno` int(11) NOT NULL,
   `bill_no` int(11) NOT NULL,
   `pur_date` date DEFAULT NULL,
-  `party_name` varchar(20) DEFAULT NULL,
+  `party_name` varchar(250) DEFAULT NULL,
   `total` float DEFAULT NULL,
   `tax` float DEFAULT NULL,
   `othercharges` float DEFAULT NULL,
@@ -277,33 +277,6 @@ CREATE TABLE `salarygiven` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_items`
---
-
-CREATE TABLE `tbl_items` (
-  `itemId` int(11) NOT NULL,
-  `itemHeader` varchar(512) NOT NULL COMMENT 'Heading',
-  `itemSub` varchar(1021) NOT NULL COMMENT 'sub heading',
-  `itemDesc` text COMMENT 'content or description',
-  `itemImage` varchar(80) DEFAULT NULL,
-  `isDeleted` tinyint(4) NOT NULL DEFAULT '0',
-  `createdBy` int(11) NOT NULL,
-  `createdDtm` datetime NOT NULL,
-  `updatedDtm` datetime DEFAULT NULL,
-  `updatedBy` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `tbl_items`
---
-
-INSERT INTO `tbl_items` (`itemId`, `itemHeader`, `itemSub`, `itemDesc`, `itemImage`, `isDeleted`, `createdBy`, `createdDtm`, `updatedDtm`, `updatedBy`) VALUES
-(1, 'jquery.validation.js', 'Contribution towards jquery.validation.js', 'jquery.validation.js is the client side javascript validation library authored by Jörn Zaefferer hosted on github for us and we are trying to contribute to it. Working on localization now', 'validation.png', 0, 1, '2015-09-02 00:00:00', NULL, NULL),
-(2, 'CodeIgniter User Management', 'Demo for user management system', 'This the demo of User Management System (Admin Panel) using CodeIgniter PHP MVC Framework and AdminLTE bootstrap theme. You can download the code from the repository or forked it to contribute. Usage and installation instructions are provided in ReadMe.MD', 'cias.png', 0, 1, '2015-09-02 00:00:00', NULL, NULL);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tbl_reset_password`
 --
 
@@ -365,9 +338,9 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`userId`, `email`, `password`, `name`, `mobile`, `roleId`, `isDeleted`, `createdBy`, `createdDtm`, `updatedBy`, `updatedDtm`) VALUES
-(1, 'admin@codeinsect.com', '$2y$10$WQQRBQDkxV/98bqK.24Dp.uMVS6KcztVqdwwTrOBLIWLSeSqE2gii', 'System Administrator', '9890098900', 1, 0, 0, '2015-07-01 18:56:49', 1, '2017-03-03 12:08:39'),
-(2, 'manager@codeinsect.com', '$2y$10$quODe6vkNma30rcxbAHbYuKYAZQqUaflBgc4YpV9/90ywd.5Koklm', 'Manager', '9890098900', 2, 0, 1, '2016-12-09 17:49:56', 1, '2017-10-07 22:43:07'),
-(3, 'employee@codeinsect.com', '$2y$10$M3ttjnzOV2lZSigBtP0NxuCtKRte70nc8TY5vIczYAQvfG/8syRze', 'Employee', '9890098900', 3, 0, 1, '2016-12-09 17:50:22', NULL, NULL);
+(1, 'admin@example.com', '$2y$10$WQQRBQDkxV/98bqK.24Dp.uMVS6KcztVqdwwTrOBLIWLSeSqE2gii', 'System Administrator', '9890098900', 1, 0, 0, '2015-07-01 18:56:49', 1, '2017-03-03 12:08:39'),
+(2, 'manager@example.com', '$2y$10$quODe6vkNma30rcxbAHbYuKYAZQqUaflBgc4YpV9/90ywd.5Koklm', 'Manager', '9890098900', 2, 0, 1, '2016-12-09 17:49:56', 1, '2017-10-07 22:43:07'),
+(3, 'employee@example.com', '$2y$10$M3ttjnzOV2lZSigBtP0NxuCtKRte70nc8TY5vIczYAQvfG/8syRze', 'Employee', '9890098900', 3, 0, 1, '2016-12-09 17:50:22', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -395,7 +368,7 @@ CREATE TABLE `worker` (
   `phone` varchar(250) NOT NULL,
   `address` varchar(250) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `is_delete` int(11) DEFAULT NULL,
+  `is_delete` int(11) DEFAULT '0',
   `salary` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -528,12 +501,6 @@ ALTER TABLE `salarygiven`
   ADD PRIMARY KEY (`srno`);
 
 --
--- Indexes for table `tbl_items`
---
-ALTER TABLE `tbl_items`
-  ADD PRIMARY KEY (`itemId`);
-
---
 -- Indexes for table `tbl_reset_password`
 --
 ALTER TABLE `tbl_reset_password`
@@ -583,17 +550,17 @@ ALTER TABLE `workerloanpaid`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `company_details`
 --
 ALTER TABLE `company_details`
-  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `fine_bill`
 --
 ALTER TABLE `fine_bill`
-  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=688;
+  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `fine_company_paid`
 --
@@ -603,27 +570,27 @@ ALTER TABLE `fine_company_paid`
 -- AUTO_INCREMENT for table `fine_description`
 --
 ALTER TABLE `fine_description`
-  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2289;
+  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `item_list`
 --
 ALTER TABLE `item_list`
-  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `precision_bill`
 --
 ALTER TABLE `precision_bill`
-  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `precision_company_paid`
 --
 ALTER TABLE `precision_company_paid`
-  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `precision_description`
 --
 ALTER TABLE `precision_description`
-  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `precision_sample`
 --
@@ -633,42 +600,37 @@ ALTER TABLE `precision_sample`
 -- AUTO_INCREMENT for table `purchase_fine`
 --
 ALTER TABLE `purchase_fine`
-  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
+  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `purchase_fine_paid`
 --
 ALTER TABLE `purchase_fine_paid`
-  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
+  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `purchase_precision`
 --
 ALTER TABLE `purchase_precision`
-  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `purchase_precision_paid`
 --
 ALTER TABLE `purchase_precision_paid`
-  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
+  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `reminder`
 --
 ALTER TABLE `reminder`
-  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `salarygiven`
 --
 ALTER TABLE `salarygiven`
-  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT for table `tbl_items`
---
-ALTER TABLE `tbl_items`
-  MODIFY `itemId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tbl_reset_password`
 --
 ALTER TABLE `tbl_reset_password`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tbl_roles`
 --
@@ -688,17 +650,17 @@ ALTER TABLE `track`
 -- AUTO_INCREMENT for table `worker`
 --
 ALTER TABLE `worker`
-  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `workerloan`
 --
 ALTER TABLE `workerloan`
-  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `workerloanpaid`
 --
 ALTER TABLE `workerloanpaid`
-  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `srno` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

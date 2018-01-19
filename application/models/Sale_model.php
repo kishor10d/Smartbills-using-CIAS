@@ -61,4 +61,47 @@ class Sale_model extends CI_Model
         $result = $query->result();        
         return $result;
     }
+
+    function insertBillItem($itemData)
+    {
+        $this->db->trans_start();
+        $this->db->insert($this->tableName.'_description', $itemData);
+        $insert_id = $this->db->insert_id();
+        $this->db->trans_complete();
+        
+        return $insert_id;
+    }
+
+    function getBillItemData($billNo)
+    {
+        $this->db->select("BaseTbl.*");
+        $this->db->from($this->tableName.'_description as BaseTbl');
+        $this->db->where("BaseTbl.billno", $billNo);
+        $query = $this->db->get();
+        
+        $result = $query->result();        
+        return $result;
+    }
+
+    function deleteItemFromBill($srno)
+    {
+        $this->db->where('srno', $srno);
+        $this->db->delete($this->tableName.'_description');
+    }
+
+    function recordTotalSale($saleData)
+    {
+        $this->db->trans_start();
+        $this->db->insert($this->tableName.'_bill', $saleData);
+        $insert_id = $this->db->insert_id();
+        $this->db->trans_complete();
+        
+        return $insert_id;
+    }
+
+    function updateBillNumber($lastId, $prevBillNumber)
+    {
+        $this->db->where('billno', $prevBillNumber);
+        $this->db->update($this->tableName.'_description', array("billno"=>$lastId));
+    }
 }

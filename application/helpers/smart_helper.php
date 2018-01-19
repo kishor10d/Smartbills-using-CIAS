@@ -159,4 +159,52 @@ if(!function_exists('typeDecision'))
     }
 }
 
+
+/**
+ * This function is used to generate invoice number
+ */
+if(!function_exists('generateBillNumber'))
+{
+    function generateBillNumber()
+    {
+        return 'SMRT-'.randNumber();
+    }
+}
+
+/**
+ * This function used to generate 6 digit random number
+ * @param {number} $length : This is length of random number
+ * @return {number} $rand : This is random number
+ */
+if(!function_exists('randNumber'))
+{
+    function randNumber($length = 6)
+    {
+        $char = "0123456789";
+        $char = str_shuffle($char);
+        for($i = 0, $rand = '', $l = strlen($char) - 1; $i < $length; $i ++) {
+            $rand .= $char{mt_rand(0, $l)};
+        }
+        return $rand;
+    }
+}
+
+/**
+ * This function is used to generate random string
+ * @param {number} $length : This is length of random string
+ * @return {string} $rand : This is random string
+ */
+if(!function_exists('randString'))
+{
+    function randString($length = 5)
+    {
+        $char = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        $char = str_shuffle($char);
+        for($i = 0, $rand = '', $l = strlen($char) - 1; $i < $length; $i ++) {
+            $rand .= $char{mt_rand(0, $l)};
+        }
+        return $rand;
+    }
+}
+
 ?>

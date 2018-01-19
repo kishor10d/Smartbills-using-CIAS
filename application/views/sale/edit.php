@@ -3,7 +3,7 @@
     <section class="content-header">
       <h1>
         <i class="fa fa-money" aria-hidden="true"></i> Sales Bill
-        <small>Add new sale bill</small>
+        <small>Edit sale bill</small>
       </h1>
     </section>
     

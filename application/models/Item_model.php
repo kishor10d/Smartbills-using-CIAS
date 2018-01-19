@@ -78,4 +78,26 @@ class Item_model extends CI_Model
         
         return 1;
     }
+
+    /**
+     * This function used to get items
+     */
+    function getItems()
+    {
+        $this->db->select('BaseTbl.srno, BaseTbl.item_name');
+        $this->db->from('item_list as BaseTbl');
+        $query = $this->db->get();        
+        $result = $query->result();
+        return $result;
+    }
+
+    function getItemByName($itemName)
+    {
+        $this->db->select('BaseTbl.srno, BaseTbl.item_name, BaseTbl.item_price, BaseTbl.item_labour');
+        $this->db->from('item_list as BaseTbl');
+        $this->db->where('BaseTbl.item_name', $itemName);
+        $query = $this->db->get();        
+        $result = $query->row();
+        return $result;
+    }
 }

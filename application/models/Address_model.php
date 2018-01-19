@@ -90,4 +90,15 @@ class Address_model extends CI_Model
         $result = $query->result();        
         return $result;
     }
+
+    function getAddressByCompanyName($companyName)
+    {
+        $this->db->select('BaseTbl.srno, BaseTbl.companyname, BaseTbl.address');
+        $this->db->from('address as BaseTbl');
+        $this->db->where('BaseTbl.companyname', $companyName);
+        $query = $this->db->get();
+        
+        $result = $query->row();
+        return $result;
+    }
 }

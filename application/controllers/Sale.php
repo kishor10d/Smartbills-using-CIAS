@@ -170,7 +170,7 @@ class Sale extends BaseController
             $data["billData"] = $billData;
             $data["itemData"] = $billItemData;
 
-            $this->global['pageTitle'] = 'SmartCIAS : Add New Sale';
+            $this->global['pageTitle'] = 'SmartCIAS : Edit Sale';
 
             $this->loadViews("sale/edit", $this->global, $data, NULL);
         }
@@ -201,6 +201,29 @@ class Sale extends BaseController
         redirect('sale');
     }
 
-    
+    function getInvoice($billNo)
+    {
+        if($this->isAdmin() == TRUE)
+        {
+            $this->loadThis();
+        }
+        else
+        {
+            $this->load->model('item_model', 'item');
+            $data['addresses'] = $this->address->getAddresses();
+            $data['items'] = $this->item->getItems();
+
+            $billData = $this->sale->getBillData($billNo);
+
+            $billItemData = $this->sale->getBillItemData($billData->bill_no);
+
+            $data["billData"] = $billData;
+            $data["itemData"] = $billItemData;
+
+            $this->global['pageTitle'] = 'SmartCIAS : Invoice - '.$billData->bill_no;
+
+            $this->loadViews("sale/invoice", $this->global, $data, NULL);
+        }
+    }
 
 }

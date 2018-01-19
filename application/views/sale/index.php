@@ -112,8 +112,7 @@
                         <td class="text-center"><?= $record->vat ?></td>
                         <td class="text-center"><?= $record->other_charges ?></td>
                         <td class="text-center"><?= $total ?></td>
-                        <td class="text-center"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
-                            <i class="fa fa-cog" aria-hidden="true"></td>
+                        <td class="text-center"><a type="button" class="btn btn-info" href="<?= base_url().'sale/invoice/'.$record->srno ?>"><i class="fa fa-cog" aria-hidden="true"></a></td>
                         <td class="text-center"><button class="btn btn-default"><i class="fa fa-times" aria-hidden="true" style="color:red"></i></button></td>
                         <td class="text-center"><a href="<?= base_url().'sale/editOld/'.$record->srno ?>" class="btn btn-success">Edit</a></td>
                         <td class="text-center"><button class="btn btn-success">Add</button></td>

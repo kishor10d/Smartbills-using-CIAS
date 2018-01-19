@@ -134,7 +134,7 @@ class Sale extends BaseController
                             "sell_date"=>date('Y-m-d', strtotime($postData['date'])),
                             "creation_date"=>date('Y-m-d H:i:s'));
         
-        $prevBillNumber = $postData["hBillno"]. "-" .date('Y-m-d', strtotime($postData['date']));
+        $prevBillNumber = $postData["hBillno"]. "-" .date('d-m-Y', strtotime($postData['date']));
         
         $result = $this->sale->recordTotalSale($saleData);
 
@@ -147,5 +147,60 @@ class Sale extends BaseController
 
         redirect('sale');
     }
+
+    /**
+     * This function is used to load the add new form
+     */
+    function editOld($billNo)
+    {
+        if($this->isAdmin() == TRUE)
+        {
+            $this->loadThis();
+        }
+        else
+        {
+            $this->load->model('item_model', 'item');
+            $data['addresses'] = $this->address->getAddresses();
+            $data['items'] = $this->item->getItems();
+
+            $billData = $this->sale->getBillData($billNo);
+
+            $billItemData = $this->sale->getBillItemData($billData->bill_no);
+
+            $data["billData"] = $billData;
+            $data["itemData"] = $billItemData;
+
+            $this->global['pageTitle'] = 'SmartCIAS : Add New Sale';
+
+            $this->loadViews("sale/edit", $this->global, $data, NULL);
+        }
+    }
+
+    function updateTotalSale()
+    {
+        $postData = $this->input->post();   
+
+        $this->load->model('address_model', 'address');
+        $companyData = $this->address->getAddressByCompanyName($postData["buyersname"]);
+
+        $saleData = array("buyer_name"=>$postData["buyersname"],
+                            "buyer_address"=>$companyData->address,
+                            "amount"=>$postData["amount"],
+                            "vat"=>$postData["vat"], 
+                            "other_charges"=>$postData["othercharges"],
+                            "sell_date"=>date('Y-m-d', strtotime($postData['date'])));
+        
+        $result = $this->sale->updateTotalSale($saleData, $postData["hSrno"]);
+
+        if($result > 0){
+            $this->session->set_flashdata('success', 'Sale updated successfully');
+        } else {
+            $this->session->set_flashdata('warning', 'Either nothing changed Or sale updation failed');
+        }
+
+        redirect('sale');
+    }
+
+    
 
 }

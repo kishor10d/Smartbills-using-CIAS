@@ -104,4 +104,23 @@ class Sale_model extends CI_Model
         $this->db->where('billno', $prevBillNumber);
         $this->db->update($this->tableName.'_description', array("billno"=>$lastId));
     }
+
+    function getBillData($billNo)
+    {
+        $this->db->select("BaseTbl.*");
+        $this->db->from($this->tableName.'_bill as BaseTbl');
+        $this->db->where("BaseTbl.srno", $billNo);
+        $query = $this->db->get();
+        
+        $result = $query->row();
+        return $result;
+    }
+
+    function updateTotalSale($saleData, $srno)
+    {
+        $this->db->where('srno', $srno);
+        $this->db->update($this->tableName.'_bill', $saleData);
+
+        return $this->db->affected_rows();
+    }
 }

@@ -29,6 +29,26 @@
                     <?php echo $this->session->flashdata('success'); ?>
                 </div>
                 <?php } ?>
+                <?php  
+                    $warning = $this->session->flashdata('warning');
+                    if($warning)
+                    {
+                ?>
+                <div class="alert alert-warning alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <?php echo $this->session->flashdata('warning'); ?>
+                </div>
+                <?php } ?>
+                <?php  
+                    $info = $this->session->flashdata('info');
+                    if($info)
+                    {
+                ?>
+                <div class="alert alert-info alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <?php echo $this->session->flashdata('info'); ?>
+                </div>
+                <?php } ?>
                 
                 <div class="row">
                     <div class="col-md-12">
@@ -95,7 +115,7 @@
                         <td class="text-center"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
                             <i class="fa fa-cog" aria-hidden="true"></td>
                         <td class="text-center"><button class="btn btn-default"><i class="fa fa-times" aria-hidden="true" style="color:red"></i></button></td>
-                        <td class="text-center"><button class="btn btn-success">Edit</button></td>
+                        <td class="text-center"><a href="<?= base_url().'sale/editOld/'.$record->srno ?>" class="btn btn-success">Edit</a></td>
                         <td class="text-center"><button class="btn btn-success">Add</button></td>
                         <td class="text-center"><button class="btn btn-success">Print</button></td>
                         <td class="text-center"><button class="btn btn-success">Print</button></td>
@@ -126,5 +146,6 @@
             jQuery("#searchList").attr("action", baseURL + "sale/" + value);
             jQuery("#searchList").submit();
         });
+        setTimeout( function() { $(".alert").fadeOut("slow") }, 5000);
     });
 </script>
